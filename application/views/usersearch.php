@@ -38,7 +38,9 @@ $(document).ready(function(){
  function load_data(query)
  {
   $.ajax({
-   url:"<?php echo base_url(); ?>usersearch/fetch",
+   url:"<?php
+   $this->load->helper('url');
+   echo base_url(); ?>usersearch/fetch",
    method:"POST",
    data:{query:query},
    success:function(data){

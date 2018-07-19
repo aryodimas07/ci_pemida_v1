@@ -31,7 +31,7 @@ class Usersearch extends CI_Controller {
    {
     $output .= '
       <tr>
-       <td>'.$row->Nama.'</td>
+       <td>'.$row->nama.'</td>
       </tr>
     ';
    }
