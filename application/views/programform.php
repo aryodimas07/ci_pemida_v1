@@ -24,10 +24,11 @@
         <p> <div class="table-responsive">
                                         <table class="table table-bordered" id="dynamic_field">
                                              <tr>
-                                                  <td><input type="text" name="name[]" id="search" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" /></td>
-                                                   <div id="display">
-                                                     <div id="autoDisplay"> </div>
-                                                   </div>
+                                                  <td><input type="text" name="name[]" id="search" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" />
+                                                    <div id="display">
+                                                     <div id="autoDisplay"> </div></div>
+                                                  </td>
+
                                                   <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
                                              </tr>
                                         </table>
@@ -47,7 +48,7 @@
       var i=1;
       $('#add').click(function(){
            i++;
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" /><div id="display"><div id="autoDisplay"></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");
@@ -83,7 +84,7 @@ function ajaxSearch()
             };
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url(); ?>userajaxsearch/autocomplete",
+            url: "<?php echo base_url(); ?>createprogramform/autocomplete",
             data: post_data,
             success: function (data) {
                 // return success

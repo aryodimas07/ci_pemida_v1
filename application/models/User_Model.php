@@ -26,12 +26,18 @@ class User_Model extends CI_Model
     public function get_user_name($name)
     {
         $this->db->select('nama');
-        $htis->db->from('user');
+        $this->db->from('user');
         $this->db->like('nama', $name);
         $this->db->limit(3);
         $this->db->order_by('nama', 'ASC');
         $query = $this->db->get();
         return $query->result_array();
+    }
+    public function get_name($name)
+    {
+        $this->db->select('nama');
+        $this->db->like('nama', $name);
+        return $this->db->get('user',10)->result();
     }
 
     public function is_user_exist($data)
