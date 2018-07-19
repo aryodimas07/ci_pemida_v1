@@ -26,8 +26,31 @@ class Auth extends CI_Controller
     {
         //ambil data dari input form
         $data = array(
-  'email' => $this->input->post('email'),
-  'password' => $this->input->post('password')
-  );
+          'email' => $this->input->post('email'),
+          'password' => $this->input->post('password')
+        );
+
+        //cek apakah user ada
+        $result = $this->user_model->is_user_exist($data);
+
+        //jika user ada
+        if ($result == true) {
+            //ambil data login user
+            $email = $this->input->post('email');
+            $result = $this->user_model->get_user_info($email);
+            $session_data = array('email' => $result['email'], 'password' => $result['password'], 'isAdmin' => $result['isAdmin'] );
+
+            //masukkan ke session
+            $this->session->set_userdata('logged_in', $session_data);
+            redirect(site_url());
+        } else {
+            $this->load->view('login/index');
+        }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata(array('logged_in', ''));
+        redirect(site_url());
     }
 }
