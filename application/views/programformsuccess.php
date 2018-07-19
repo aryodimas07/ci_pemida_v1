@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Buat Program</title>
+<title>Program terbuat</title>
 </head>
 <body>
 
