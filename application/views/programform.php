@@ -11,7 +11,7 @@
          <?php echo form_open('createprogramform'); ?>
 
          <h5>Nama program</h5>
-         <input type = "text" name = "nama" value = "<?php echo set_value('nama'); ?>" size = "36" />
+         <input type = "text" name = "nama" value = "<?php echo set_value('nama'); ?>" size = "127" />
 
          <h5>Deskripsi program</h5>
          <input type = "text" name = "deskripsi" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
