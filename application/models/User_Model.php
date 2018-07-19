@@ -19,6 +19,7 @@ class User_Model extends CI_Model
         $this->db->from('user');
         $this->db->where('email', $email);
         $this->db->limit(1);
+        $query = $this->db->get();
         return $query->row_array();
     }
 }
