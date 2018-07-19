@@ -15,6 +15,15 @@
          $this->form_validation->set_rules('deskripsi', 'Deskripsi program', 'required',
                                             array('required' => '%s tidak boleh kosong.'));
 
+
+
+
+
+
+
+
+
+
          if ($this->form_validation->run() == FALSE) {
             $this->load->view('programform');
          }
@@ -22,5 +31,27 @@
             $this->load->view('programformsuccess');
          }
       }
+
+      public function autocomplete(){
+           // load model
+           $this->load->model('User_Model');
+
+           $name = $this->input->post('search');
+
+           $result = $this->User_Model->get_name($name);
+
+           if (!empty($result))
+           {
+                foreach ($result as $row):
+                     echo "<li><a href='#'>" . $row->nama . "</a></li>";
+                endforeach;
+           }
+           else
+           {
+                 echo "<li> <em> Not found ... </em> </li>";
+           }
+      }
+
+
    }
 ?>
