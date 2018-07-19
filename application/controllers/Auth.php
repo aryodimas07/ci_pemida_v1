@@ -16,7 +16,7 @@ class Auth extends CI_Controller
     public function index()
     {
         if (isset($this->session->userdata()['logged_in'])) {
-            $this->load->view('app/index');
+            $this->load->view('app/programSearch');
         } else {
             $this->load->view('auth/loginPage');
         }
