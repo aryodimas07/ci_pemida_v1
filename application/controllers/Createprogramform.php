@@ -15,6 +15,15 @@
          $this->form_validation->set_rules('deskripsi', 'Deskripsi program', 'required',
                                             array('required' => '%s tidak boleh kosong.'));
 
+
+
+
+
+
+
+
+
+
          if ($this->form_validation->run() == FALSE) {
             $this->load->view('programform');
          }
