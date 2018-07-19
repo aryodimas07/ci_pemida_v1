@@ -58,7 +58,7 @@
 </head>
 <body>
   <div class="container-fluid text-center">
-    <h1 class="title h1">CAPEXRT</h1>
+    <h1 class="title h1">PEMIDA</h1>
     <form class="form-signin" action=<?php echo site_url('login'); ?> method="post" autocomplete="off">
       <h1 class="h3 mb-3 font-weight-normal">Mohon login terlebih dahulu</h1>
       <label for="inputEmail" class="sr-only">Email</label>
