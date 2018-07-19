@@ -44,7 +44,7 @@ class Auth extends CI_Controller
             $this->session->set_userdata('logged_in', $session_data);
             redirect(site_url());
         } else {
-            $this->load->view('login/index');
+            $this->load->view('auth/index');
         }
     }
 
