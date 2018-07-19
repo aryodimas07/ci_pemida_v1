@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/pemida_v1_CI/';
+$config['base_url'] = 'http://localhost/ci_pemida_v1/';
 
 /*
 |--------------------------------------------------------------------------
