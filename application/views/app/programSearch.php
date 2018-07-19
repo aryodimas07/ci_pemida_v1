@@ -11,7 +11,10 @@
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">PEMIDA</a>
+      <a class="navbar-brand" href="#">
+        <img src=<?php echo site_url('assets/img/Asset1ldpi.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
+        PEMIDA
+      </a>
       <div class="input-group">
         <input id="inputSearchFilter" onkeyup="searchFilter()" type="text" class="form-control" placeholder="Cari nama program...">
       </div>
