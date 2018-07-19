@@ -18,7 +18,7 @@
       align-items: center;
       padding-top: 40px;
       padding-bottom: 40px;
-      background-color: #f0e5dd;
+      background-color: #e3e3e3;
     }
 
     .form-signin {
@@ -54,11 +54,18 @@
     .title {
       color: red;
     }
+
+    #btn-signin {
+      background-color: #343a40;
+      color: white;
+    }
   </style>
 </head>
 <body>
   <div class="container-fluid text-center">
-    <h1 class="title h1">PEMIDA</h1>
+    <img src=<?php echo site_url('assets/img/Black-Logoldpi.png') ?> width=100 height="100" class="mb-3 d-inline-block align-top" alt="">
+
+    <!-- <h1 class="title h1">PEMIDA</h1> -->
     <form class="form-signin" action=<?php echo site_url('login'); ?> method="post" autocomplete="off">
       <h1 class="h3 mb-3 font-weight-normal">Mohon login terlebih dahulu</h1>
       <label for="inputEmail" class="sr-only">Email</label>
@@ -67,7 +74,7 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required aut
       >
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <button id="btn-signin" class="btn btn-lg btn-block" type="submit">Sign in</button>
     </form>
   </div>
 
