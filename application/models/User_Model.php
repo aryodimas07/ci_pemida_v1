@@ -15,11 +15,26 @@ class User_Model extends CI_Model
      */
     public function get_user_info($email)
     {
-        $this->db->select('email', 'password', 'isAdmin');
+        $this->db->select('email, password, isAdmin');
         $this->db->from('user');
         $this->db->where('email', $email);
         $this->db->limit(1);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    public function get_user_name($name)
+    {
+      $this->db->select('nama');
+      $htis->db->from('user');
+      $this->db->like('nama', $name);
+      $this->db->limit(3);
+      $this->db->order_by('nama', 'ASC');
+      $query = $this->db->get();
+      return $query->result_array();
+    }
+
+    public function is_user_exist($data)
+    {
     }
 }
