@@ -18,13 +18,16 @@ class Auth extends CI_Controller
         if (isset($this->session->userdata()['logged_in'])) {
             $this->load->view('app/index');
         } else {
-            //$this->load->view('login/index');
-            $this->user_model->get_user_info('dimas');
+            $this->load->view('auth/loginPage');
         }
     }
 
     public function login()
     {
-
+        //ambil data dari input form
+        $data = array(
+  'email' => $this->input->post('email'),
+  'password' => $this->input->post('password')
+  );
     }
 }
