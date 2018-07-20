@@ -69,14 +69,15 @@
            });
       });*/
  });
- </script>
+</script>
 <script type="text/javascript">
 function ajaxSearch()
 {
-    var input_data = $('#search').val();
+    var input_data = $('[id^=search]').val();
+    num = '';
     if (input_data.length === 0)
     {
-        $('#display').hide();
+        $('[id^=display]'+num).hide();
     }
     else
     {
@@ -91,13 +92,18 @@ function ajaxSearch()
             success: function (data) {
                 // return success
                 if (data.length > 0) {
-                    $('#display').show();
-                    $('#autoDisplay').addClass('auto_list');
-                    $('#autoDisplay').html(data);
+                    $('[id^=display]'+num).show();
+                    $('[id^=autoDisplay]'+num).addClass('auto_list');
+                    $('[id^=autoDisplay]'+num).html(data);
                 }
             }
          });
      }
-     i++;
  }
+ //To select country name
+function selectUser(val) {
+$("#search").val(val);
+$("#Display").hide();
+$("#autoDisplay").hide();
+}
 </script>
