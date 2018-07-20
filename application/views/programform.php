@@ -15,13 +15,15 @@
          <?php echo validation_errors(); ?>
          <?php echo form_open('createprogramform'); ?>
 
+         <p>
          <h5>Nama program</h5>
-         <input type = "text" name = "nama" value = "<?php echo set_value('nama'); ?>" size = "127" />
+         <input type = "text" name = "nama" class="form-control name_list" value = "<?php echo set_value('nama'); ?>" size = "127" />
 
          <h5>Deskripsi program</h5>
-         <input type = "text" name = "deskripsi" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
+        <input type = "text" name = "deskripsi" class="form-control name_list" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
 
-        <p> <div class="table-responsive">
+        <h5>Nama PIC</h5>
+        <div class="table-responsive">
                                         <table class="table table-bordered" id="dynamic_field">
                                              <tr>
                                                   <td><input type="text" name="name[]" id="search" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" />
@@ -48,7 +50,7 @@
       var i=1;
       $('#add').click(function(){
            i++;
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" /><div id="display"><div id="autoDisplay"></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search'+i+'" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" /><div id="display'+i+'""><div id="autoDisplay"'+i+'"></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");
@@ -96,5 +98,6 @@ function ajaxSearch()
             }
          });
      }
+     i++;
  }
 </script>
