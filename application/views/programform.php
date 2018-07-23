@@ -26,10 +26,11 @@
         <div class="table-responsive">
                                         <table class="table table-bordered" id="dynamic_field">
                                              <tr>
-                                                  <td><input type="text" name="name[]" id="search" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" />
-                                                    <div id="display">
-                                                     <div id="autoDisplay"> </div></div>
+                                                  <td><input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch(this);" />
+                                                    <div id="display1">
+                                                     <div id="autoDisplay1"> </div></div>
                                                   </td>
+
 
                                                   <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
                                              </tr>
@@ -50,7 +51,7 @@
       var i=1;
       $('#add').click(function(){
            i++;
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search'+i+'" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch();" /><div id="display'+i+'""><div id="autoDisplay"'+i+'"></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch(this);" /><div id="display'+i+'""><div id="autoDisplay"'+i+'"></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");
@@ -69,15 +70,29 @@
            });
       });*/
  });
-</script>
-<script type="text/javascript">
-function ajaxSearch()
+
+
+var req = null;
+function ajaxSearch(passvalue)
 {
-    var input_data = $('[id^=search]').val();
-    num = '';
+    var id = passvalue.id;
+    var splitid = id.split('_');
+    var index = splitid[1];
+
+    console.log('test id = ' + index);
+     console.log('#display' + index);
+      console.log('#autoDisplay' + index);
+      console.log('#search_' + index);
+    if (req != null) req.abort();
+      var input_data = $('#search_'+index).val();
+    //var input_data = $('[id^=search]').val();
+    //var input_data = $('#search2').val();\
+    //  var id = this.id;
+    //num = '';
+      console.log(input_data);
     if (input_data.length === 0)
     {
-        $('[id^=display]'+num).hide();
+        $('#display'+index).hide();
     }
     else
     {
@@ -89,21 +104,25 @@ function ajaxSearch()
             type: "POST",
             url: "<?php echo base_url(); ?>createprogramform/autocomplete",
             data: post_data,
+            context : this,
+            cache: false,
             success: function (data) {
                 // return success
                 if (data.length > 0) {
-                    $('[id^=display]'+num).show();
-                    $('[id^=autoDisplay]'+num).addClass('auto_list');
-                    $('[id^=autoDisplay]'+num).html(data);
+                    $('#display'+index).show();
+                    $('#autoDisplay'+index).addClass('auto_list');
+                    $('#autoDisplay'+index).html(data);
                 }
             }
          });
+         return false;
      }
  }
+
  //To select country name
 function selectUser(val) {
 $("#search").val(val);
-$("#Display").hide();
+$("#display").hide();
 $("#autoDisplay").hide();
 }
 </script>
