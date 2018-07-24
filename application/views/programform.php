@@ -17,16 +17,16 @@
 
          <p>
          <h5>Nama program</h5>
-         <input type = "text" name = "nama" class="form-control name_list" value = "<?php echo set_value('nama'); ?>" size = "127" />
+         <input type = "text" name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" />
 
          <h5>Deskripsi program</h5>
-        <input type = "text" name = "deskripsi" class="form-control name_list" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
+        <input type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
 
         <h5>Nama PIC</h5>
         <div class="table-responsive">
                                         <table class="table table-bordered" id="dynamic_field">
                                              <tr>
-                                                  <td><input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch(this);" />
+                                                  <td><input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
                                                     <div id="display1">
                                                      <div id="autoDisplay1"> </div></div>
                                                   </td>
@@ -50,8 +50,8 @@
  $(document).ready(function(){
       var i=1;
       $('#add').click(function(){
-           i++;
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list" onkeyup="ajaxSearch(this);" /><div id="display'+i+'""><div id="autoDisplay"'+i+'"></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           i++; //onkeyup="ajaxSearch(this);"
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list"  /><div id="display'+i+'""><div id="autoDisplay'+i+'""></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");
@@ -71,6 +71,7 @@
       });*/
  });
 
+/*
 
 var req = null;
 function ajaxSearch(passvalue)
@@ -118,8 +119,59 @@ function ajaxSearch(passvalue)
          return false;
      }
  }
+ */
+ var req = null;
+ $(document).ready(function(){
+   $(document).on('keyup','.name_list', function(){
 
- //To select country name
+     console.log(req);
+
+     var id = this.id;
+     var splitid = id.split('_');
+     var index = splitid[1];
+
+    // console.log('test id = ' + index);
+      //console.log('#display' + index);
+       //console.log('#autoDisplay' + index);
+       //console.log('#search_' + index);
+    // if (req != null) req.abort();
+       var input_data = $('#search_'+index).val();
+     //var input_data = $('[id^=search]').val();
+     //var input_data = $('#search2').val();\
+     //  var id = this.id;
+     //num = '';
+     if (input_data.length === 0)
+     {
+         $('#display'+index).hide();
+     }
+     else
+     {
+         var post_data = {
+             'search': input_data,
+             '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+             };
+          //   console.log(post_data);
+            $.ajax({
+             type: "POST",
+             url: "<?php echo base_url(); ?>createprogramform/autocomplete",
+             data: post_data,
+             context : this,
+             cache: false,
+             success: function (data) {
+                 // return success
+                 if (data.length > 0) {
+                     $('#display'+index).show();
+                     $('#autoDisplay'+index).addClass('auto_list');
+                     $('#autoDisplay'+index).html(data);
+                 }
+             }
+          });
+      // return false;
+      }
+    });
+  });
+
+ //To select user name
 function selectUser(val) {
 $("#search").val(val);
 $("#display").hide();

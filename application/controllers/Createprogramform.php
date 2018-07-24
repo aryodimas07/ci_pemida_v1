@@ -4,6 +4,8 @@
 
       public function index() {
          /* Load form helper */
+         $this->load->model('user_model');
+         $this->load->model('insert_model');
          $this->load->helper(array('form', 'url'));
 
          /* Load form validation library */
@@ -11,14 +13,51 @@
 
          /* Set validation rule for name field in the form */
          $this->form_validation->set_rules('nama', 'Nama program', 'required',
-                                            array('required' => '%s tidak boleh kosong.'));
+                                            array(
+                                              'required' => 'kolom %s tidak boleh kosong.'
+                                          )
+                                        );
          $this->form_validation->set_rules('deskripsi', 'Deskripsi program', 'required',
-                                            array('required' => '%s tidak boleh kosong.'));
+                                            array(
+                                              'required' => 'kolom %s tidak boleh kosong.'
+                                          )
+                                        );
+         $this->form_validation->set_rules('name[]', 'Nama PIC', 'required|callback_username_check',
+                                            array(
+                                              'required' => 'kolom %s tidak boleh kosong.'
+                                          )
+                                        );
+
          if ($this->form_validation->run() == FALSE) {
             $this->load->view('programform');
          }
          else {
-            $this->load->view('programformsuccess');
+           $data_program = array(
+            'nama' => $this->input->post('nama'),
+            'deskripsi' => $this->input->post('deskripsi')
+            );
+            //Transfering data to Model
+           $id_program = $this->insert_model->program_insert('program',$data_program);
+
+
+           $i=0;
+           foreach($_POST['name'] as $key=>$val){
+              $user = $this->user_model->get_user_id($val);
+              $id_user = array(
+                  'username' => $user->id
+              );
+             $data_pic[$i]['id_pic'] = $id_user['username'];
+             $data_pic[$i]['id_program']= $id_program;
+             $i++;
+           }
+            //Transfering data to Model
+            $this->db->insert_batch('program_pic',$data_pic);
+
+
+            $data['message'] = 'Data Inserted Successfully';
+            //Loading View
+            $this->load->view('programformsuccess', $data);
+
          }
       }
 
@@ -41,6 +80,19 @@
                  echo "<li> <em> Not found ... </em> </li>";
            }
       }
+      //check if username exist
+      public function username_check($str){
+            $this->load->model('User_Model');
+          if($this->User_Model->user_exist($str))
+               {
+                        return TRUE;
+               }
+               else
+               {
+                       $this->form_validation->set_message('username_check', 'kolom {field} harus sesuai dengan nama user');
+                       return FALSE;
+               }
+        }
 
 
    }

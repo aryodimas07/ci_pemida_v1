@@ -51,4 +51,25 @@ class User_Model extends CI_Model
             return false;
         }
     }
+    function user_exist($key)
+    {
+      $this->db->where('nama',$key);
+      $query = $this->db->get('user');
+      if ($query->num_rows() > 0){
+          return true;
+      }
+      else{
+          return false;
+      }
+    }
+    function get_user_id($nama)
+    {
+      $this->db->select('id');
+      $this->db->from('user');
+      $this->db->where('nama',$nama);
+      $this->db->limit(1);
+      $query = $this->db->get();
+      return $query->row();
+
+    }
 }
