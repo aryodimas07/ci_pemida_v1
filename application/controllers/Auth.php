@@ -1,6 +1,5 @@
 <?php
 
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
@@ -15,11 +14,20 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        if (isset($this->session->userdata()['logged_in'])) {
-            $this->load->view('app/programSearch');
+        if ($this->is_logged_in()) {
+          redirect(site_url('program'));
         } else {
-            $this->load->view('auth/loginPage');
+          $this->load->view('auth/loginPage');
         }
+    }
+
+    public function is_logged_in()
+    {
+      if (isset($this->session->userdata()['logged_in'])) {
+          return true;
+      } else {
+          return false;
+      }
     }
 
     public function login()
@@ -44,7 +52,8 @@ class Auth extends CI_Controller
             $this->session->set_userdata('logged_in', $session_data);
             redirect(site_url());
         } else {
-            $this->load->view('auth/index');
+            $data['alert'] = '1';
+            $this->load->view('auth/loginpage', $data);
         }
     }
 
