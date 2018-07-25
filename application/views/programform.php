@@ -10,7 +10,7 @@
 
    </head>
 
-   <body>
+   <body onload="readonly();">
       <!-- <form action = "" method = ""> -->
          <?php echo validation_errors(); ?>
          <?php echo form_open('createprogramform'); ?>
@@ -20,7 +20,10 @@
          <input type = "text" name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" />
 
          <h5>Deskripsi program</h5>
-        <input type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
+         <input type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
+
+        <h5>Tanggal program</h5>
+        <input type="text" name="date" id="datepicker" value= <?php echo date('Y-m-d H:i:s'); ?>/>
 
         <h5>Nama PIC</h5>
         <div class="table-responsive">
@@ -176,5 +179,9 @@ function selectUser(val) {
 $("#search").val(val);
 $("#display").hide();
 $("#autoDisplay").hide();
+}
+
+function readonly() {
+    document.getElementById('datepicker').setAttribute("readonly", true);
 }
 </script>
