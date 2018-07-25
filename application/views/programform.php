@@ -17,26 +17,38 @@
 
          <p>
          <h5>Nama program</h5>
-         <input type = "text" name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" />
+         <input type = "text" name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" placholder:"Masukan nama program" />
 
          <h5>Deskripsi program</h5>
-         <input type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
+         <textarea type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" style="resize:vertical" placholder:"Masukan nama program" /></textarea>
+
+         <h5>Timeplan program</h5>
+         <textarea name = "timeplan" class="form-control" value = "<?php echo set_value('timeplan'); ?>" style="resize:vertical" placholder:"Masukan nama program"/></textarea>
 
         <h5>Tanggal program</h5>
-        <input type="text" name="date" id="datepicker" value= <?php echo date('Y-m-d H:i:s'); ?>/>
+        <input type="text" name="date" id="datepicker" class="form-control" value= <?php echo date('Y-m-d H:i:s'); ?>/>
+
+        <h5>Nilai release</h5>
+        <input type="number" name="nilai_release" class="form-control" value = "<?php echo set_value('nilai_release'); ?>" min="0 "max="100000000000" />
 
         <h5>Nama PIC</h5>
         <div class="table-responsive">
                                         <table class="table table-bordered" id="dynamic_field">
                                              <tr>
                                                   <td>
-                                                    <input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
+                                                    <input type="text" name="name[]" id="search_1" placeholder="Masukan nama PIC" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
                                                     <div id="display1">
                                                     <div id="autoDisplay1"> </div></div>
+                                                    <input type="radio" name="role[]" value="1"> IPA
+                                                    <input type="radio" name="role[]" value="2"> PMO
+                                                    <input type="radio" name="role[]" value="3"> GAF
+                                                    <input type="radio" name="role[]" value="4"> DEV
+
                                                   </td>
                                                   <td>
-                                                    <input type="text" name="keterangan[]" id="keterangan_1" placeholder="Isi keterangan" class="form-control name_list"  value = "<?php echo set_value('keterangan[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
+                                                    <input type="text" name="keterangan[]" id="keterangan_1" placeholder="Masukan keterangan" class="form-control name_list"   /><!--onkeyup="ajaxSearch(this);"-->
                                                   </td>
+
 
 
                                                   <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
@@ -58,7 +70,7 @@
       var i=1;
       $('#add').click(function(){
            i++; //onkeyup="ajaxSearch(this);"
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list"/><div id="display'+i+'""><div id="autoDisplay'+i+'""></div></div></td><td><input type="text" name="keterangan[]" id="keterangan_'+i+'" placeholder="Isi keterangan" class="form-control name_list"  value = "<?php echo set_value('keterangan[]'); ?>"/></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Masukan nama PIC" class="form-control name_list"/><div id="display'+i+'""><div id="autoDisplay'+i+'""></div></div><input type="radio" name="role[]" value="1"> IPA<input type="radio" name="role[]" value="2"> PMO<input type="radio" name="role[]" value="3"> GAF<input type="radio" name="role[]" value="4"> DEV</td><td><input type="text" name="keterangan[]" id="keterangan_'+i+'" placeholder="Masukan keterangan" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");
