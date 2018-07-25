@@ -51,9 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
+$route['create-program'] = 'program/create';
 $route['program'] = 'program/index';
+$route['program/(:any)'] = 'program/view/$1';
 $route['default_controller'] = 'auth';
-$route['(:any)'] = 'auth';
+// $route['(:any)'] = 'auth';
 //delete "//" to enable direct access
 //$route['(:any)'] = 'auth';
 $route['translate_uri_dashes'] = FALSE;
