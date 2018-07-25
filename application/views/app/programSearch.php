@@ -58,7 +58,7 @@
         <h3>Daftar Program</h3>
         <div id="programList" class="list-group">
           <?php foreach ($program_list as $row) { ?>
-            <a href="#" class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
+            <a href=<?php echo site_url('program/'.$row['slug']); ?> class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
           <?php } ?>
           <p class="h5 list-group-item list-group-item-warning">Dalam Proses</p>
           <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
