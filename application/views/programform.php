@@ -29,9 +29,13 @@
         <div class="table-responsive">
                                         <table class="table table-bordered" id="dynamic_field">
                                              <tr>
-                                                  <td><input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
+                                                  <td>
+                                                    <input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
                                                     <div id="display1">
-                                                     <div id="autoDisplay1"> </div></div>
+                                                    <div id="autoDisplay1"> </div></div>
+                                                  </td>
+                                                  <td>
+                                                    <input type="text" name="keterangan[]" id="keterangan_1" placeholder="Isi keterangan" class="form-control name_list"  value = "<?php echo set_value('keterangan[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
                                                   </td>
 
 
@@ -54,7 +58,7 @@
       var i=1;
       $('#add').click(function(){
            i++; //onkeyup="ajaxSearch(this);"
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list"  /><div id="display'+i+'""><div id="autoDisplay'+i+'""></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list"/><div id="display'+i+'""><div id="autoDisplay'+i+'""></div></div></td><td><input type="text" name="keterangan[]" id="keterangan_'+i+'" placeholder="Isi keterangan" class="form-control name_list"  value = "<?php echo set_value('keterangan[]'); ?>"/></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");
@@ -127,7 +131,7 @@ function ajaxSearch(passvalue)
  $(document).ready(function(){
    $(document).on('keyup','.name_list', function(){
 
-     console.log(req);
+    //console.log(req);
 
      var id = this.id;
      var splitid = id.split('_');
