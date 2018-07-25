@@ -8,26 +8,15 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->model('user_model');
-        $this->load->library('session');
-        $this->load->helper('url_helper');
     }
 
     public function index()
     {
-        if ($this->is_logged_in()) {
+        if (is_logged_in()) {
           redirect(site_url('program'));
         } else {
           $this->load->view('auth/loginPage');
         }
-    }
-
-    public function is_logged_in()
-    {
-      if (isset($this->session->userdata()['logged_in'])) {
-          return true;
-      } else {
-          return false;
-      }
     }
 
     public function login()
