@@ -18,7 +18,7 @@ if (!function_exists('is_admin')) {
   {
     $ci = get_instance();
     $admin = $ci->session->userdata()['logged_in']['isAdmin'];
-    if ($admin === 1) {
+    if ($admin == 1) {
       return true;
     } else {
       return false;
