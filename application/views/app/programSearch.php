@@ -44,16 +44,6 @@
   </script>
   <div class="container mt-3 mb-3">
     <div class="row">
-      <div class=" mb-3 col-sm col-md">
-        <h3>Terakhir Dibuka</h3>
-        <div id="recentlyOpened" class="list-group">
-          <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
-        </div>
-      </div>
       <div class="col-sm">
         <h3>Daftar Program</h3>
         <div id="programList" class="list-group">
