@@ -18,6 +18,11 @@
       <div class="input-group">
         <input id="inputSearchFilter" onkeyup="searchFilter()" type="text" class="form-control" placeholder="Cari nama program...">
       </div>
+      <ul class="nav nav-pills ml-3">
+        <li class="nav-item">
+          <a class="nav-link btn-danger" href=<?php echo site_url('logout'); ?>>Logout</a>
+        </li>
+      </ul>
     </div>
   </nav>
   <script type="text/javascript">
@@ -52,6 +57,9 @@
       <div class="col-sm">
         <h3>Daftar Program</h3>
         <div id="programList" class="list-group">
+          <?php foreach ($program_list as $row) { ?>
+            <a href="#" class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
+          <?php } ?>
           <p class="h5 list-group-item list-group-item-warning">Dalam Proses</p>
           <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
           <a href="#" class="list-group-item list-group-item-action">Program1 - CAPEX DIT 2018</a>

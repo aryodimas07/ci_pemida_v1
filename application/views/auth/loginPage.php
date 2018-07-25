@@ -7,62 +7,86 @@
   <!--bootstrap.css-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <style media="screen">
-    html, body{
-      height: 100%;
-    }
+  html, body{
+    height: 100%;
+  }
 
-    body {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #e3e3e3;
-    }
+  body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #e3e3e3;
+  }
 
-    .form-signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+  }
 
-    .form-signin .form-control {
-      position: relative;
-      box-sizing: border-box;
-      height: auto;
-      padding: 10px;
-      font-size: 16px;
-    }
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
 
-    .form-signin .form-control:focus {
-      z-index: 2;
-    }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
 
-    .form-signin input[type="email"] {
-      margin-bottom: -1px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 
-    .form-signin input[type="password"] {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
+  .form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 
-    .title {
-      color: red;
-    }
+  .title {
+    color: red;
+  }
 
-    #btn-signin {
-      background-color: #343a40;
-      color: white;
-    }
+  #btn-signin {
+    background-color: #343a40;
+    color: white;
+  }
+
+  .alert-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .alert {
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
   </style>
 </head>
 <body>
   <div class="container-fluid text-center">
+    <?php if (isset($alert)): ?>
+      <div class="alert-wrapper">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Email dan Password salah!</strong> Jika belum mendaftar, segera mendaftar di
+          <a href=<?php echo site_url('register'); ?>>link ini</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    <?php endif; ?>
     <img src=<?php echo site_url('assets/img/Black-Logoldpi.png') ?> width=100 height="100" class="mb-3 d-inline-block align-top" alt="">
 
     <!-- <h1 class="title h1">PEMIDA</h1> -->
