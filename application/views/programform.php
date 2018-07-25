@@ -10,7 +10,7 @@
 
    </head>
 
-   <body>
+   <body onload="readonly();">
       <!-- <form action = "" method = ""> -->
          <?php echo validation_errors(); ?>
          <?php echo form_open('createprogramform'); ?>
@@ -20,15 +20,22 @@
          <input type = "text" name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" />
 
          <h5>Deskripsi program</h5>
-        <input type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
+         <input type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" size = "254" />
+
+        <h5>Tanggal program</h5>
+        <input type="text" name="date" id="datepicker" value= <?php echo date('Y-m-d H:i:s'); ?>/>
 
         <h5>Nama PIC</h5>
         <div class="table-responsive">
                                         <table class="table table-bordered" id="dynamic_field">
                                              <tr>
-                                                  <td><input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
+                                                  <td>
+                                                    <input type="text" name="name[]" id="search_1" placeholder="Enter your Name" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
                                                     <div id="display1">
-                                                     <div id="autoDisplay1"> </div></div>
+                                                    <div id="autoDisplay1"> </div></div>
+                                                  </td>
+                                                  <td>
+                                                    <input type="text" name="keterangan[]" id="keterangan_1" placeholder="Isi keterangan" class="form-control name_list"  value = "<?php echo set_value('keterangan[]'); ?>"/><!--onkeyup="ajaxSearch(this);"-->
                                                   </td>
 
 
@@ -51,7 +58,7 @@
       var i=1;
       $('#add').click(function(){
            i++; //onkeyup="ajaxSearch(this);"
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list"  /><div id="display'+i+'""><div id="autoDisplay'+i+'""></div></div></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="search_'+i+'" placeholder="Enter your Name" class="form-control name_list"/><div id="display'+i+'""><div id="autoDisplay'+i+'""></div></div></td><td><input type="text" name="keterangan[]" id="keterangan_'+i+'" placeholder="Isi keterangan" class="form-control name_list"  value = "<?php echo set_value('keterangan[]'); ?>"/></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");
@@ -124,7 +131,7 @@ function ajaxSearch(passvalue)
  $(document).ready(function(){
    $(document).on('keyup','.name_list', function(){
 
-     console.log(req);
+    //console.log(req);
 
      var id = this.id;
      var splitid = id.split('_');
@@ -176,5 +183,9 @@ function selectUser(val) {
 $("#search").val(val);
 $("#display").hide();
 $("#autoDisplay").hide();
+}
+
+function readonly() {
+    document.getElementById('datepicker').setAttribute("readonly", true);
 }
 </script>

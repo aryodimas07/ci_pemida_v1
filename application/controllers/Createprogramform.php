@@ -6,6 +6,7 @@
          /* Load form helper */
          $this->load->model('user_model');
          $this->load->model('insert_model');
+         $this->load->helper('date');
          $this->load->helper(array('form', 'url'));
 
          /* Load form validation library */
@@ -34,7 +35,8 @@
          else {
            $data_program = array(
             'nama' => $this->input->post('nama'),
-            'deskripsi' => $this->input->post('deskripsi')
+            'deskripsi' => $this->input->post('deskripsi'),
+            'dateCreated' => $this->input->post('date')
             );
             //Transfering data to Model
            $id_program = $this->insert_model->program_insert('program',$data_program);
@@ -48,6 +50,7 @@
               );
              $data_pic[$i]['id_pic'] = $id_user['username'];
              $data_pic[$i]['id_program']= $id_program;
+             $data_pic[$i]['keterangan']= $_POST['keterangan'][$key];
              $i++;
            }
             //Transfering data to Model
