@@ -50,6 +50,7 @@
               );
              $data_pic[$i]['id_pic'] = $id_user['username'];
              $data_pic[$i]['id_program']= $id_program;
+             $data_pic[$i]['role_id']= $_POST['role'][$key];
              $data_pic[$i]['keterangan']= $_POST['keterangan'][$key];
              $i++;
            }
