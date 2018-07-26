@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
-$route['create-program'] = 'program/create';
+$route['create'] = 'program/create_program';
 $route['program'] = 'program/index';
 $route['program/(:any)'] = 'program/view/$1';
 $route['default_controller'] = 'auth';

@@ -13,23 +13,23 @@
    <body onload="readonly();">
       <!-- <form action = "" method = ""> -->
          <?php echo validation_errors(); ?>
-         <?php echo form_open('createprogramform'); ?>
+         <?php echo form_open('create'); ?>
 
          <p>
          <h5>Nama program</h5>
          <input type = "text" name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" placholder:"Masukan nama program" />
 
          <h5>Deskripsi program</h5>
-         <textarea type = "text" name = "deskripsi" class="form-control" value = "<?php echo set_value('deskripsi'); ?>" style="resize:vertical" placholder:"Masukan nama program" /></textarea>
+         <textarea type = "text" name = "deskripsi" class="form-control"  style="resize:vertical" placholder:"Masukan nama program"><?php if(isset($_POST['deskripsi'])) { echo htmlentities ($_POST['deskripsi']); }?></textarea>
 
          <h5>Timeplan program</h5>
-         <textarea name = "timeplan" class="form-control" value = "<?php echo set_value('timeplan'); ?>" style="resize:vertical" placholder:"Masukan nama program"/></textarea>
+         <textarea name = "timeplan" class="form-control" style="resize:vertical" placholder:"Masukan nama program"><?php if(isset($_POST['timeplan'])) { echo htmlentities ($_POST['timeplan']); }?></textarea>
 
         <h5>Tanggal program</h5>
         <input type="text" name="date" id="datepicker" class="form-control" value= <?php echo date('Y-m-d H:i:s'); ?>/>
 
         <h5>Nilai release</h5>
-        <input type="number" name="nilai_release" class="form-control" value = "<?php echo set_value('nilai_release'); ?>" min="0 "max="100000000000" />
+        <input type="number" name="nilai_release" class="form-control" value = "<?php echo set_value('nilai_release'); ?>" min="0 "max="100000000000" onKeyUp="limitText(this.form.nilai_release,this.form.countdown,12);" onKeyDown="limitText(this.form.nilai_release,this.form.countdown,12);" />
 
         <h5>Nama PIC</h5>
         <div class="table-responsive">
@@ -170,9 +170,10 @@ function ajaxSearch(passvalue)
              '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
              };
           //   console.log(post_data);
+
             $.ajax({
              type: "POST",
-             url: "<?php echo base_url(); ?>createprogramform/autocomplete",
+             url: "<?php echo base_url(); ?>Program/autocomplete",
              data: post_data,
              context : this,
              cache: false,
@@ -199,5 +200,12 @@ $("#autoDisplay").hide();
 
 function readonly() {
     document.getElementById('datepicker').setAttribute("readonly", true);
+}
+function limitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} else {
+		limitCount.value = limitNum - limitField.value.length;
+	}
 }
 </script>
