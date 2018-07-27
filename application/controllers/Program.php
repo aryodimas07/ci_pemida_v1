@@ -59,7 +59,7 @@ class Program extends CI_Controller
                    }
                    else
                    {
-                           $this->form_validation->set_message('username_check', 'kolom {field} harus sesuai dengan nama user');
+                           $this->form_validation->set_message('username_check', 'semua kolom {field} harus sesuai dengan nama user dan tidak boleh kosong');
                            return FALSE;
                    }
             }
@@ -98,7 +98,7 @@ class Program extends CI_Controller
 
       /* Load form validation library */
       $this->load->library('form_validation');
-
+      $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
       /* Set validation rule for name field in the form */
       $this->form_validation->set_rules('nama', 'Nama program', 'required',
                                          array(
@@ -119,6 +119,11 @@ class Program extends CI_Controller
                                         array(
                                           'required' => 'kolom %s tidak boleh kosong.'
                                        )
+                                     );
+      $this->form_validation->set_rules('nilai_release', 'nilai release', 'required',
+                                        array(
+                                          'required' => 'kolom %s tidak boleh kosong.'
+                                        )
                                      );
       $this->form_validation->set_rules('role[]', 'peran PIC', 'required',
                                        array(
@@ -146,7 +151,7 @@ class Program extends CI_Controller
         //trying to change slug using update
         //$this->program_model->update_slug($nameslug,$id_program);
 
-        $i=0;
+        $i=1;
         foreach($this->input->post('name') as $key=>$val){
            $user = $this->user_model->get_user_id($val);
            $id_user = array(
@@ -164,7 +169,8 @@ class Program extends CI_Controller
 
          //$data['message'] = $nameslug;
          //Loading View
-         $this->load->view('programformsuccess');
+         $data['nameslug']=$nameslug;
+         $this->load->view('programformsuccess',$data);
 
       }
     }
