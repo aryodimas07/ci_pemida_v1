@@ -24,6 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/ci_pemida_v1/';
+// $config['base_url'] = 'http://192.168.43.94/ci_pemida_v1/';
+// $config['base_url'] = 'http://192.168.0.17/ci_pemida_v1/';
 
 /*
 |--------------------------------------------------------------------------
