@@ -51,7 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
-$route['create-program'] = 'program/create';
+$route['create'] = 'program/create_program';
+$route['notification'] = 'Sendnotifikasi';
 $route['program'] = 'program/index';
 $route['program/view/(:any)'] = 'program/view/$1';
 $route['program/update'] = 'program/update_program';

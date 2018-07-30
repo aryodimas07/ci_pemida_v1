@@ -96,4 +96,13 @@ class Program_Model extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function update_slug($slug,$index)
+    {
+      $data = array(
+      'slug' => $slug,
+        );
+        $this->db->where('id', $index);
+        $this->db->update('program', $data);
+    }
 }

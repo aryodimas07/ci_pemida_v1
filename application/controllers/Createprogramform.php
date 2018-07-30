@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
    class Createprogramform extends CI_Controller {
 
@@ -28,6 +29,18 @@
                                               'required' => 'kolom %s tidak boleh kosong.'
                                           )
                                         );
+         $this->form_validation->set_rules('timeplan', 'timeplan program', 'required',
+                                           array(
+                                             'required' => 'kolom %s tidak boleh kosong.'
+                                          )
+                                        );
+         $this->form_validation->set_rules('role[]', 'peran PIC', 'required',
+                                          array(
+                                            'required' => 'pilihan %s tidak boleh kosong.'
+                                             )
+                                        );
+
+
 
          if ($this->form_validation->run() == FALSE) {
             $this->load->view('programform');
@@ -36,7 +49,9 @@
            $data_program = array(
             'nama' => $this->input->post('nama'),
             'deskripsi' => $this->input->post('deskripsi'),
-            'dateCreated' => $this->input->post('date')
+            'timeplan' => $this->input->post('timeplan'),
+            'dateCreated' => $this->input->post('date'),
+            'nilaiRelease' => $this->input->post('nilai_release')
             );
             //Transfering data to Model
            $id_program = $this->insert_model->program_insert('program',$data_program);
