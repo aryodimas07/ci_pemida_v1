@@ -53,7 +53,8 @@ $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 $route['create-program'] = 'program/create';
 $route['program'] = 'program/index';
-$route['program/(:any)'] = 'program/view/$1';
+$route['program/view/(:any)'] = 'program/view/$1';
+$route['program/update'] = 'program/update_program';
 $route['default_controller'] = 'auth';
 // $route['(:any)'] = 'auth';
 //delete "//" to enable direct access
