@@ -25,7 +25,7 @@
          <label for="formnama" class="col-sm-2 col-form-label">Nama program</label>
          <div class="col-sm-10">
           <input type = "text" id='formnama' name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" placholder:"Masukan nama program" />
-          <?php echo form_error('nama', '<div class="error">', '</div>'); ?>
+          <?php echo form_error('nama', '<div class="error" style="background-color:red">', '</div>'); ?>
          </div>
 
          <label for="formdeskripsi" class="col-sm col-form-label">Deskripsi program</label>
@@ -237,4 +237,4 @@ function limitText(limitField, limitCount, limitNum) {
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<

@@ -11,5 +11,16 @@ class Insert_Model extends CI_Model
           $query = $this->db->insert($table, $data);
           return $this->db->insert_id();
       }
+      function insertUser($data)
+    	{
+    		if($this->db->insert('user', $data))
+    		{
+    			return  $this->db->insert_id();
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    	}
 }
 ?>

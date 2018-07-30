@@ -100,32 +100,32 @@ class Program extends CI_Controller
       $this->load->library('form_validation');
       $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
       /* Set validation rule for name field in the form */
-      $this->form_validation->set_rules('nama', 'Nama program', 'required',
+      $this->form_validation->set_rules('nama', 'Nama program', 'trim|required',
                                          array(
                                            'required' => 'kolom %s tidak boleh kosong.'
                                        )
                                      );
-      $this->form_validation->set_rules('deskripsi', 'Deskripsi program', 'required',
+      $this->form_validation->set_rules('deskripsi', 'Deskripsi program', 'trim|required',
                                          array(
                                            'required' => 'kolom %s tidak boleh kosong.'
                                        )
                                      );
-      $this->form_validation->set_rules('name[]', 'Nama PIC', 'required|callback_username_check',
+      $this->form_validation->set_rules('name[]', 'Nama PIC', 'trim|required|callback_username_check',
                                          array(
                                            'required' => 'kolom %s tidak boleh kosong.'
                                        )
                                      );
-      $this->form_validation->set_rules('timeplan', 'timeplan program', 'required',
+      $this->form_validation->set_rules('timeplan', 'timeplan program', 'trim|required',
                                         array(
                                           'required' => 'kolom %s tidak boleh kosong.'
                                        )
                                      );
-      $this->form_validation->set_rules('nilai_release', 'nilai release', 'required',
+      $this->form_validation->set_rules('nilai_release', 'nilai release', 'trim|required',
                                         array(
                                           'required' => 'kolom %s tidak boleh kosong.'
                                         )
                                      );
-      $this->form_validation->set_rules('role[]', 'peran PIC', 'required',
+      $this->form_validation->set_rules('role[]', 'peran PIC', 'trim|required',
                                        array(
                                          'required' => 'pilihan %s tidak boleh kosong.'
                                           )
