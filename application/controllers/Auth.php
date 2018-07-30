@@ -21,17 +21,18 @@ class Auth extends CI_Controller
 
     public function login()
     {
-        //ambil data dari input form
-        $data = array(
-          'email' => $this->input->post('email'),
-          'password' => $this->input->post('password')
-        );
+        if (!empty($_REQUEST)) {
+          //ambil data dari input form
+          $data = array(
+            'email' => $this->input->post('email'),
+            'password' => $this->input->post('password')
+          );
 
-        //cek apakah user ada
-        $result = $this->user_model->is_user_exist($data);
+          //cek apakah user ada
+          $result = $this->user_model->is_user_exist($data);
 
-        //jika user ada
-        if ($result == true) {
+          //jika user ada
+          if ($result == true) {
             //ambil data login user
             $email = $this->input->post('email');
             $result = $this->user_model->get_user_info($email);
@@ -40,10 +41,14 @@ class Auth extends CI_Controller
             //masukkan ke session
             $this->session->set_userdata('logged_in', $session_data);
             redirect(site_url());
-        } else {
+          } else {
             $data['alert'] = '1';
             $this->load->view('auth/loginpage', $data);
+          }
+        } else {
+          redirect(site_url());
         }
+
     }
 
     public function logout()
