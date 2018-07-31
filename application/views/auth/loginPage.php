@@ -94,11 +94,9 @@
     <form class="form-signin" action=<?php echo site_url('login'); ?> method="post" autocomplete="off">
       <h1 class="h3 mb-3 font-weight-normal">Mohon login terlebih dahulu</h1>
       <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Alamat email" required aut
-      >
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Alamat email" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required aut
-      >
+      <input type="password" name="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required>
       <button id="btn-signin" class="btn btn-lg btn-block" type="submit">Sign in</button>
     </form>
   </div>
