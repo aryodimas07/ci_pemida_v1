@@ -70,6 +70,15 @@ class User_Model extends CI_Model
       $this->db->limit(1);
       $query = $this->db->get();
       return $query->row();
+    }
 
+    function get_user_id_by_email($email)
+    {
+      $this->db->select('id');
+      $this->db->from('user');
+      $this->db->where('email',$email);
+      $this->db->limit(1);
+      $query = $this->db->get();
+      return $query->row();
     }
 }
