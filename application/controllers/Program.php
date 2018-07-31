@@ -14,16 +14,21 @@ class Program extends CI_Controller
     {
         if (is_logged_in()) {
             $login_email = $this->session->userdata()['logged_in']['email'];
-            $data['program_list'] = $this->program_model->get_program_relate($login_email);
+            $data['program_list_done'] = $this->program_model->get_program_info_by_status_and_email(1, $login_email);
+            $data['program_list_not_done'] = $this->program_model->get_program_info_by_status_and_email(0, $login_email);
             $this->load->view('app/programsearch', $data);
         } else {
             $this->load->view('auth/loginPage');
         }
     }
 
-    public function view($slug)
+    public function view($slug, $state = false)
     {
+        if ($state !== false) {
+            $data['state'] = $state;
+        }
         if (is_logged_in()) {
+            $data['user_logged_in'] = get_email_info();
             if ($this->program_model->is_program_exists($slug)) {
                 $data['program_info'] = $this->program_model->get_program_info($slug);
                 $data['program_pic'] = $this->program_model->get_program_pic($slug);
@@ -57,7 +62,7 @@ class Program extends CI_Controller
                 // jika sudah sampai tahap 9
                 if ($proc_length == 9) {
                     //ubah status menjadi 1 (selesai)
-                    $this->set_status($slug, 1);
+                    $this->program_model->set_status($slug, 1);
                     //dan set semua proses menjadi 1 (selesai)
                     for ($i=0; $i < 9 ; $i++) {
                         $data['proc_status'][$i] = 1;
@@ -87,17 +92,21 @@ class Program extends CI_Controller
                     }
                 }
 
-                $data['proc_list'] = $this->program_model->get_procurement($slug);
+                $data['proc_list'] = $this->program_model->get_procurement();
                 $data['proc_data'] = $proc_data;
 
                 $data['status'] = $data['program_info']['status'];
                 if ($data['program_info']['status'] == 0) {
                     $data['status'] = 'Dalam Proses';
+                } else {
+                    $data['status'] = 'Selesai';
                 }
                 $this->load->view('app/viewProgram', $data);
             } else {
-
+                show_error("Tidak terdapat program bernama:<br/>".$slug);
             }
+        } else {
+            $this->load->view('auth/loginpage');
         }
     }
 
@@ -150,15 +159,22 @@ class Program extends CI_Controller
         //cek tahap yg harus di update
         $proc_data = $this->program_model->get_procurement_relate($program_slug);
         $proc_length = count($proc_data);
-        $proc_update = 0;
+        $proc_update = 100;
+        echo json_encode($proc_data);
+        echo "proc update : ".$proc_update;
+        for ($i=0; $i < count($proc_data); $i++) {
+            $proc_updated[$i] = $proc_data[$i]['id_procurement'];
+        }
+        echo json_encode($proc_updated);
         for ($i=1; $i <= 9; $i++) {
-            if (!isset($proc_data[$i]['id_procurement'])) {
-                $proc_update = $i;
-                break;
+            if (!in_array($i, $proc_updated)) {
+              $proc_update = $i;
+              break;
             }
         }
+        echo $proc_update;
 
-        //cek role yg dimiliki user dlm progrm
+        //cek role yg dimiliki user dlm program
         $pic_role = $this->program_model->get_pic_role($user, $program_slug);
 
         //jika tidak ada role maka user tidak memiliki kewenangan
@@ -168,9 +184,10 @@ class Program extends CI_Controller
             //cek apakah role tsb dapat mengupdate tahap tersebut
             if ($role[$pic_role['role_id']][$proc_update] == 1) {
                 //update informasi proses procurement
-                header("location:javascript://history.go(-1)");
+                $this->program_model->create_information($proc_update, $program_slug);
+                redirect(site_url('program/view/'.$program_slug));
             } else {
-                echo "Anda tidak memiliki kewenangan untuk mengupdate proses ini";
+                redirect(site_url('program/view/'.$program_slug.'/2'));
             }
         }
     }
