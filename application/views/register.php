@@ -31,7 +31,12 @@ label {
   align-items: center;
   display: flex;
   height: 40px;
+  color:black;
 }
+.form-group{
+  color:black;
+}
+
 
 .error-msg{
   margin:5px auto;
@@ -42,6 +47,11 @@ label {
 .error{
   color:red;
 }
+
+.container{
+
+}
+
 
 </style>
 <body>
@@ -54,6 +64,11 @@ label {
     unset($errorMsg);
   }
   ?>
+  <div class="container shadow" style="width: 500px">
+
+
+  <ul class="list-group">
+    <li class="list-group-item">
   <?php
   $attributes = array('id' => 'identicalForm', 'class' => 'class=form-horizontal form-register');
   echo form_open('register',$attributes);
@@ -76,7 +91,7 @@ label {
   <div class="form-group">
     <label for="password" class="col-form-label">Password</label>
     <input type = "password" id='password' name = "password" class="form-control" value = "<?php echo set_value('password'); ?>" size = "127" placholder:"Password" />
-    <small id="passwordHelp" class="form-text text-muted">Password minimal 8 karakter.</small>
+    <p><small id="passwordHelp" class="form-text text-muted">Password minimal 8 karakter.</small></p>
 
     <?php echo form_error('password', '<div class="error">', '</div>'); ?>
   </div>
@@ -99,6 +114,9 @@ label {
      Sudah terdaftar? <?php echo anchor(site_url(), 'login');?> disini.
   </div>
 </form>
+</li>
+</ul>
+</div>
 
 </body>
 </html>

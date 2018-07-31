@@ -7,10 +7,8 @@
    </head>
 
    <body>
-      <?php
-         echo $this->session->flashdata('email_sent');
-         echo form_open('/Sendnotifikasi/send_mail');
-      ?>
+      <?php echo $this->session->flashdata('email_sent');?>
+      <?php echo form_open('/Sendnotifikasi/send_mail');  ?>
       <br>
       <label class="form-check-label" for="to">Alamat tujuan</label>
       <div>
