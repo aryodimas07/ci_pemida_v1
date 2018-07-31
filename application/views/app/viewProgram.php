@@ -84,130 +84,206 @@
     background-color: #343a40;
     border-bottom-left-radius: 10px;
   }
+
   </style>
 </head>
 <body>
   <?php if (isset($state)): ?>
     <div class="alert-wrapper">
-    <?php if ($state == 1): ?>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-      Data berhasil di update
-    <?php else: ?>
-      <?php if ($state == 2): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Anda tidak memiliki kewenangan untuk mengupdate proses ini!
-      <?php endif; ?>
-    <?php endif; ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <?php if ($state == 1): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          Data berhasil di update
+        <?php else: ?>
+          <?php if ($state == 2): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              Anda tidak memiliki kewenangan untuk mengupdate proses ini!
+            <?php endif; ?>
+          <?php endif; ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
-    </div>
-  <?php endif; ?>
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="<?php echo site_url(); ?>">
-        <img src=<?php echo site_url('assets/img/Asset1ldpi.png'); ?> width="30" height="30" class="d-inline-block align-top" alt="">
-        PEMIDA
-      </a>
-      <div class="d-flex flex-row bd-highlight">
-        <div class="dropdown pointer">
-          <img id="navbar-avatar" class="rounded-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src=<?php echo site_url('assets/img/avatar.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <h6 class="dropdown-header"><?php echo get_email_info() ?></h6>
-            <a class="dropdown-item" href="<?php echo site_url('logout'); ?>">Logout</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+    <?php endif; ?>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="<?php echo site_url(); ?>">
+          <img src=<?php echo site_url('assets/img/Asset1ldpi.png'); ?> width="30" height="30" class="d-inline-block align-top" alt="">
+          PEMIDA
+        </a>
+        <div class="d-flex flex-row bd-highlight">
+          <div class="dropdown pointer">
+            <img id="navbar-avatar" class="rounded-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src=<?php echo site_url('assets/img/avatar.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <h6 class="dropdown-header"><?php echo get_email_info() ?></h6>
+              <a class="dropdown-item" href="<?php echo site_url('logout'); ?>">Logout</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
-  <div class="container mt-3 mb-1">
-    <div class="row">
-      <div class="col-xl">
-        <div class="h6">RINCIAN PROGRAM</div>
-        <div class="h2 mb-3">
-          <?php if (strtolower($status) == 'selesai'): ?>
-            <?php $badge_type = 'success' ?>
-          <?php else: ?>
-            <?php $badge_type = 'warning' ?>
-          <?php endif; ?>
-          <?php echo $program_info['nama'] ?> <span class="badge badge-<?php echo $badge_type;; ?>">
-          <?php echo $status; ?>
-          </span>
+    </nav>
+    <div class="container mt-3 mb-1">
+      <div class="h6">RINCIAN PROGRAM</div>
+      <div class="row">
+        <div class="col-xl">
+          <div class="h2 mb-3">
+            <?php if (strtolower($status) == 'selesai'): ?>
+              <?php $badge_type = 'success' ?>
+            <?php else: ?>
+              <?php $badge_type = 'warning' ?>
+            <?php endif; ?>
+            <?php echo $program_info['nama'] ?> <span class="badge badge-<?php echo $badge_type;; ?>">
+              <?php echo $status; ?>
+            </span>
+          </div>
         </div>
-        <!-- deskripsi -->
-        <p><?php echo $program_info['deskripsi']; ?></p>
-        <!-- pic -->
-        <ul class="list-group shadow mb-4">
-          <li class="list-group-item">
-            <h6>PERSON IN CHARGE</h6>
-          </li>
-          <?php foreach ($program_pic as $row) {?>
+      </div>
+      <div class="row">
+        <div class="col-xl">
+          <!-- deskripsi -->
+          <p><?php echo $program_info['deskripsi']; ?></p>
+        </div>
+        <div class="col-xl">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl">
+          <!-- release PR PO GR -->
+          <ul class="list-group shadow mb-4">
             <li class="list-group-item">
-              <div class="tag-role">
-                PMO
+              <div class="h6 mb-1">
+                RELEASE
               </div>
-              <div id="picWrapper">
-                <div class="row">
-                  <div class="col-sm-3 col-lg-4 text-mobile-center">
-                    <img class="rounded-circle" src=<?php echo site_url('assets/img/avatar.png') ?> width="60" height="60" class="d-inline-block align-top" alt="">
-                  </div>
-                  <div class="col-sm-9 col-lg-8 text-mobile-center">
-                    <h5 class="card-title"><?php echo $row['nama']; ?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $row['email'] ?></h6>
-                  </div>
-                </div>
+              <div class="price" style="color: grey">
+                Rp<?php echo number_format($program_info['nilaiRelease'], 2, ".", ","); ?>
               </div>
             </li>
-          <?php } ?>
-        </ul>
-      </div>
-      <div class="col-xl">
-        <!-- procurement -->
-        <ul id="proses-procurement" class="list-group shadow mb-4">
-          <form style="display:none" id="update" action=<?php echo site_url('program/update') ?> method="post">
-            <?php
-            $data = array(
-              'program_slug' => $program_info['slug'],
-              'user_logged_in' => $user_logged_in
-            );
-            echo form_hidden($data);
-            ?>
-          </form>
-          <li class="list-group-item">
-            <h6>PROSES PROCUREMENT</h6>
-          </li>
-          <?php $disable = 0; ?>
-          <?php for ($i=0; $i < 9; $i++) { ?>
             <li class="list-group-item">
-              <?php if ($proc_status[$i] == 1): ?>
-                <div class="a">
+              <div class="h6 mb-1">
+                NILAI PR
+              </div>
+              <div class="price" style="color: grey">
+                <?php if ($program_info['nilaiPR'] == null): ?>
+                  -
                 <?php else: ?>
-                  <div class="a disable">
-                  <?php endif; ?>
+                  Rp<?php echo number_format($program_info['nilaiPR'], 2, ".", ","); ?>
+                <?php endif; ?>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="h6 mb-1">
+                NILAI PO
+              </div>
+              <div class="price" style="color: grey">
+                <?php if ($program_info['nilaiPO'] == null): ?>
+                  -
+                <?php else: ?>
+                  Rp<?php echo number_format($program_info['nilaiPO'], 2, ".", ","); ?>
+                <?php endif; ?>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="h6 mb-1">
+                NILAI GR
+              </div>
+              <div class="price" style="color: grey">
+                <?php if ($program_info['nilaiGR'] == null): ?>
+                  -
+                <?php else: ?>
+                  Rp<?php echo number_format($program_info['nilaiGR'], 2, ".", ","); ?>
+                <?php endif; ?>
+              </div>
+            </li>
+          </ul>
+          <!-- pic -->
+          <ul id="pic" class="list-group shadow mb-4">
+            <li class="list-group-item">
+              <h6 class="mb-0">PERSON IN CHARGE</h6>
+            </li>
+            <?php foreach ($program_pic as $row) {
+              ?>
+              <li class="list-group-item">
+                <div class="tag-role shadow">
+                  <?php echo $row['role'] ?>
+                </div>
+                <div id="picWrapper">
+                  <div class="row">
+                    <div class="col-sm-3 col-lg-4 text-mobile-center">
+                      <img class="rounded-circle" src=<?php echo site_url('assets/img/avatar.png') ?> width="60" height="60" class="d-inline-block align-top" alt="">
+                    </div>
+                    <div class="col-sm-9 col-lg-8 text-mobile-center">
+                      <h5 class="card-title"><?php echo $row['nama']; ?></h5>
+                      <h6 class="card-subtitle mb-2 text-muted"><?php echo $row['email'] ?></h6>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <?php
+            } ?>
+          </ul>
+        </div>
+        <div class="col-xl">
+          <!-- procurement -->
+          <ul id="proses-procurement" class="list-group shadow mb-4">
+            <form style="display:none" id="update" action=<?php echo site_url('program/update') ?> method="post">
+              <?php
+              $data = array(
+                'program_slug' => $program_info['slug'],
+                'user_logged_in' => $user_logged_in
+              );
+              echo form_hidden($data);
+              ?>
+            </form>
+            <li class="list-group-item">
+              <h6 class="mb-0">PROSES PROCUREMENT</h6>
+            </li>
+            <?php for ($i=0; $i < 9; $i++) { ?>
+              <li class="list-group-item">
+                <div class="a">
                   <?php echo $proc_list[$i]['proses']; ?>
-                  <?php if ($i == 4 && $proc_status[4] == 1 && $proc_status[3] == 0): ?>
-                    <?php echo $i ?><span class="badge badge-primary ml-3"><?php echo $proc_data[3]['submitDate'] ?></span>
-                  <?php else: ?>
-                    <?php if ($i == 4 && $proc_status[4] == 1 && $proc_status[3] == 1): ?>
-                      <span class="badge badge-primary ml-3"><?php echo $proc_data[4]['submitDate'] ?></span>
-                    <?php else: ?>
-                      <?php if ($proc_status[$i] == 1): ?>
-                        <span class="badge badge-primary ml-3"><?php echo $proc_data[$i]['submitDate'] ?></span>
-                      <?php else: ?>
-                        <?php if ($disable == 0): ?>
-                          <button id="update_program" class="ml-3 btn btn-danger shadow" type="submit" form="update" name="button">Update</button>
-                          <?php $disable = 1 ?>
-                        <?php endif; ?>
-                      <?php endif; ?>
-                    <?php endif; ?>
-                  <?php endif; ?>
                 </div>
               </li>
             <?php } ?>
+            <li class="list-group-item">
+              <div class="a">
+                Test
+                <span class="badge badge-primary ml-3"><?php echo date('y-m-d') ?></span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="a disable">
+                Test
+                <button type="button" class="ml-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter">
+                  Update
+                </button>
+              </div>
+            </li>
           </ul>
+        </div>
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Update</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Anda yakin ingin mengupdate <br>
+                <strong>
+                  <?php echo $proc; ?> ?
+                </strong>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="update_program" class="btn btn-primary" type="submit" form="update" name="button">Update</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <script type="text/javascript">

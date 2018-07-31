@@ -114,9 +114,13 @@
             <a href="#" class="list-group-item list-group-item-action">-</a>
           <?php endif; ?>
           <p class="h5 list-group-item list-group-item-success">Selesai</p>
-          <?php foreach ($program_list_done as $row): ?>
-            <a href=<?php echo site_url('program/view/'.$row['slug']); ?> class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
-          <?php endforeach; ?>
+          <?php if (count($program_list_done) != 0): ?>
+            <?php foreach ($program_list_done as $row): ?>
+              <a href=<?php echo site_url('program/view/'.$row['slug']); ?> class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <a href="#" class="list-group-item list-group-item-action">-</a>
+          <?php endif; ?>
         </div>
       </div>
     </div>

@@ -70,10 +70,11 @@ class Program_Model extends CI_Model
 
     public function get_program_pic($slug)
     {
-        $this->db->select('user.id, user.nama, user.email, user.notelp');
+        $this->db->select('user.id, user.nama, user.email, user.notelp, role.nama as role');
         $this->db->from('program');
         $this->db->join('program_pic', 'program.id = program_pic.id_program');
         $this->db->join('user', 'program_pic.id_pic = user.id');
+        $this->db->join('role', 'program_pic.role_id = role.id');
         $this->db->where('program.slug', $slug);
         $query = $this->db->get();
         return $query->result_array();
