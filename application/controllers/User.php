@@ -39,9 +39,10 @@ class User extends CI_Controller {
                                                     'required' => 'kolom %s tidak boleh kosong.'
                                                 )
                                               );
-            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]',
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]',
                                                 array(
-                                                  'required' => 'kolom %s tidak boleh kosong.'
+                                                  'required' => 'kolom %s tidak boleh kosong.',
+                                                  'min_length[8]' => '%s minimal 8 karakter'
                                                 )
                                               );
 
