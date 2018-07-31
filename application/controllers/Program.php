@@ -204,12 +204,18 @@ class Program extends CI_Controller
         $this->load->model('User_Model');
 
         $name = $this->input->post('search');
+        $index = $this->input->post('idx');
 
         $result = $this->User_Model->get_name($name);
 
         if (!empty($result)) {
             foreach ($result as $row):
-        echo "<li><a onClick=selectUser('".$row->nama."') href='#'>" . $row->nama . "</a></li>";
+      //  echo "<li><a onClick=selectUser('".$row->nama."') href='#'>" . $row->nama . "</a></li>";
+    //   echo "<li>" . $row->nama . "</li>";
+       echo "<li><a onClick=selectUser('".$index."','".$row->nama."') href='javascript:void(0)'>" . $row->nama . "</a></li>";
+
+       //<a onClick=selectUser('".$row->nama."') href='#'></a>
+
             endforeach;
         } else {
             echo "<li> <em> Not found ... </em> </li>";
@@ -271,10 +277,7 @@ array(
         $this->form_validation->set_rules(
     'role[]',
     'peran PIC',
-    'trim|required',
-array(
-  'required' => 'pilihan %s tidak boleh kosong.'
-)
+    'trim'
 );
         if ($this->form_validation->run() == false) {
             $this->load->view('programform');

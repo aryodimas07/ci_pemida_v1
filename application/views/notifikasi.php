@@ -11,9 +11,22 @@
          echo $this->session->flashdata('email_sent');
          echo form_open('/Sendnotifikasi/send_mail');
       ?>
-
-      <input type = "email" name = "email" required />
-      <input type = "submit" value = "SEND MAIL">
+      <br>
+      <label class="form-check-label" for="to">Alamat tujuan</label>
+      <div>
+        <input type = "email" name = "email" id="to" required />
+      </div>
+        <label class="form-check-label" for="input">Subjek</label>
+      <div>
+        <input type = "input" name = "pengirim" id="input" value="Pemida: Pemantauan Permintaan Pengadaan" required />
+      </div>
+      <label class="form-check-label" for="isi">Isi pesan tambahan</label>
+      <div>
+        <textarea name = "isi" id="isi" required ></textarea>
+      </div>
+      <p><div>
+        <input type = "submit" value = "SEND MAIL">
+      </div></p>
 
       <?php
          echo form_close();
