@@ -105,23 +105,18 @@
       <div class="col-sm">
         <h3>Daftar Program</h3>
         <div id="programList" class="list-group">
-          <?php foreach ($program_list as $row) { ?>
-            <a href=<?php echo site_url('program/view/'.$row['slug']); ?> class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
-          <?php } ?>
           <p class="h5 list-group-item list-group-item-warning">Dalam Proses</p>
-          <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program1 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program2 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program3 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program4 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">z - CAPEX DIT 2018</a>
+          <?php if (count($program_list_not_done) != 0): ?>
+            <?php foreach ($program_list_not_done as $row): ?>
+              <a href=<?php echo site_url('program/view/'.$row['slug']); ?> class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <a href="#" class="list-group-item list-group-item-action">-</a>
+          <?php endif; ?>
           <p class="h5 list-group-item list-group-item-success">Selesai</p>
-          <a href="#" class="list-group-item list-group-item-action">Program - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program1 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program2 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program3 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">Program4 - CAPEX DIT 2018</a>
-          <a href="#" class="list-group-item list-group-item-action">z - CAPEX DIT 2018</a>
+          <?php foreach ($program_list_done as $row): ?>
+            <a href=<?php echo site_url('program/view/'.$row['slug']); ?> class="list-group-item list-group-item-action"><?php echo $row['nama'] ?></a>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
