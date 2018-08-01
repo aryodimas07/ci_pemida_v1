@@ -71,7 +71,8 @@ class User extends CI_Controller {
 
           				if($insertUser)
           				{
-          					redirect('user/thankyou');
+          					redirect('login');
+                    //alert success
           				}
           				else
           				{

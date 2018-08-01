@@ -8,8 +8,15 @@ class Insert_Model extends CI_Model
       function program_insert($table,$data)
       {
       // Inserting in Table(students) of Database(college)
-          $query = $this->db->insert($table, $data);
+        //  $query = $this->db->insert($table, $data);
+        if($query = $this->db->insert($table, $data))
+        {
           return $this->db->insert_id();
+        }
+        else
+        {
+          return false;
+        }
       }
       function insertUser($data)
     	{

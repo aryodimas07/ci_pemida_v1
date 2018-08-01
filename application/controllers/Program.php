@@ -352,27 +352,41 @@ array(
             $id_program = $this->insert_model->program_insert('program', $data_program);
             //trying to change slug using update
             //$this->program_model->update_slug($nameslug,$id_program);
+            if($id_program){
+              $i=1;
+              foreach ($this->input->post('name') as $key=>$val) {
+                  $user = $this->user_model->get_user_id($val);
+                  $id_user = array(
+                  'username' => $user->id
+                );
+                  $data_pic[$i]['id_pic'] = $id_user['username'];
+                  $data_pic[$i]['id_program']= $id_program;
+                  $data_pic[$i]['role_id']= $this->input->post('role')[$key];
+                  $data_pic[$i]['keterangan']= $this->input->post('keterangan')[$key];
+                  $i++;
+              }
+              //Transfering data to Model
+              $insert = $this->db->insert_batch('program_pic', $data_pic);
 
-            $i=1;
-            foreach ($this->input->post('name') as $key=>$val) {
-                $user = $this->user_model->get_user_id($val);
-                $id_user = array(
-      'username' => $user->id
-    );
-                $data_pic[$i]['id_pic'] = $id_user['username'];
-                $data_pic[$i]['id_program']= $id_program;
-                $data_pic[$i]['role_id']= $this->input->post('role')[$key];
-                $data_pic[$i]['keterangan']= $this->input->post('keterangan')[$key];
-                $i++;
-            }
-            //Transfering data to Model
-            $this->db->insert_batch('program_pic', $data_pic);
-
-
-            //$data['message'] = $nameslug;
-            //Loading View
-            $data['nameslug']=$nameslug;
-            $this->load->view('programformsuccess', $data);
+              if($insert){
+                //$data['message'] = $nameslug;
+                //Loading View
+                // $data['nameslug']=$nameslug;
+                // $this->load->view('programformsuccess', $data);
+                redirect(site_url('program/view/'.$nameslug));
+              }
+              else
+              {
+                $data['errorMsg'] = 'Unable to save program. Please try again';
+                $this->load->view('create',$data);
+              }
+          }
+          else
+          {
+            // code...
+            $data['errorMsg'] = 'Unable to save program. Please try again';
+            $this->load->view('create',$data);
+          }
         }
     }
 
