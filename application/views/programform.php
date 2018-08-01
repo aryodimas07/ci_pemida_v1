@@ -15,16 +15,21 @@
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
    </head>
-   <style>
-
+   <style media="screen">
+   @media (max-width: 575.98px) {
+     div.container {
+       width: 100%!important;
+     }
+   }
+   @media (min-width: 575.98px) {
+     #picWrapper .row {
+       height: 55px;
+     }
+   }
    body{
-     background:#e3e3e3;
+     background:white;
    }
 
-   .form-create{
-     margin: 0 auto;
-     width:80%;
-   }
 
    label {
      align-items: center;
@@ -48,15 +53,51 @@
 li {
   list-style-type: none;
   color: black;
-  padding: 3px 4px;
   text-decoration: none;
   display: block;
 }
 .error{
   color:red;
 }
-   </style>
+ul.list-group{
+  background-color: white;
+}
+div.container{
 
+  width: 500px;
+  margin:50px auto;
+  background-color: white;
+  border: 1px solid;
+  border-color: lightgrey ;
+}
+.form-horizontal.form-create{
+  background-color: :grey;
+}
+.btn.btn-success{
+  border-radius: 5px;
+  color:green;
+  background-color:white;
+  margin-top: 10px;
+  width:150px;
+
+}
+.btn.btn-danger.btn_remove{
+  width:150px;
+  border-radius: 5px;
+  color:black;
+  background-color:white;
+  margin-top:  10px;
+  color: red;
+}
+h1{
+  margin:10px auto;
+  text-align:center;
+  color:#006dcc;
+}
+</style>
+<div class="container shadow">
+   <ul class="list-group">
+     <h1>Buat program</h1>
    <body onload="readonly();">
       <!-- <form action = "" method = ""> -->
          <?php //echo validation_errors(); ?>
@@ -94,27 +135,22 @@ li {
         <div class="table-responsive form-group">
                                         <table class="table" id="dynamic_field">
                                           <td>
-                                                    <div class="form-row">
-                                                      <div class="col-auto">
+
                                                         <input type="text" name="name[]" id="search_1" placeholder="Masukan nama PIC" class="form-control name_list"  value = "<?php echo set_value('name[]'); ?>" requiered><!--onkeyup="ajaxSearch(this);"-->
                                                         <div id="display1" class="dropdown">
                                                           <div id="autoDisplay1" class="dropdown-content">
                                                           </div>
                                                         </div>
-                                                            <input type="radio" name="role[0]" value="1">IPA
-                                                            <input type="radio" name="role[0]" value="2">PMO
-                                                            <input type="radio" name="role[0]" value="3">GAF
-                                                            <input type="radio" name="role[0]" value="4">DEV
-                                                        </div>
-
-
-                                                    <div class="col">
                                                      <input type="text" name="keterangan[]" id="keterangan_1" placeholder="Masukan keterangan" class="form-control name_list"   /><!--onkeyup="ajaxSearch(this);"-->
+                                                   <input type="radio" name="role[0]" value="1">IPA
+                                                   <input type="radio" name="role[0]" value="2">PMO
+                                                   <input type="radio" name="role[0]" value="3">GAF
+                                                   <input type="radio" name="role[0]" value="4">DEV
+                                                   <div>
+                                                    <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
                                                    </div>
-                                                  <div class="col-auto">
-                                                  <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
-                                                  </div>
-                                                </div>
+
+
                                                 <?php echo form_error('name[]', '<div class="error">', '</div>'); ?>
                                                   <?php echo form_error('role[]', '<div class="error">', '</div>'); ?>
                                               </td>
@@ -128,7 +164,8 @@ li {
             $(document).ready(function(){ alert("jquerytest"); });
          </script> -->
       </form>
-
+</ul>
+</div>
    </body>
 </html>
 <script>
@@ -136,7 +173,7 @@ li {
       var i=1;
       $('#add').click(function(){
            i++; //onkeyup="ajaxSearch(this);"
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><div class="form-row"><div class="col-auto"><input type="text" name="name[]" id="search_'+i+'" placeholder="Masukan nama PIC" class="form-control name_list"/><div id="display'+i+'""class="dropdown"><div id="autoDisplay'+i+'"" class="dropdown-content"></div></div><input '+i--+' type="radio" name="role['+i+']" value="1"> IPA<input type="radio" name="role['+i+']" value="2"> PMO<input type="radio" name="role['+i+']" value="3"> GAF<input type="radio" name="role['+i+']" value="4"> DEV'+i+++'</div><div class="col"><input type="text" name="keterangan[]" id="keterangan_'+i+'" placeholder="Masukan keterangan" class="form-control name_list"/></div><div class="col-auto"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td> <input type="text" name="name[]" id="search_'+i+'" placeholder="Masukan nama PIC" class="form-control name_list"/><div id="display'+i+'""class="dropdown"><div id="autoDisplay'+i+'"" class="dropdown-content"></div></div><input type="text" name="keterangan[]" id="keterangan_'+i+'" placeholder="Masukan keterangan" class="form-control name_list"/><input '+i--+' type="radio" name="role['+i+']" value="1">IPA<input type="radio" name="role['+i+']" value="2"> PMO<input type="radio" name="role['+i+']" value="3"> GAF<input type="radio" name="role['+i+++']" value="4"> DEV<div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></td></tr>');
       });
       $(document).on('click', '.btn_remove', function(){
            var button_id = $(this).attr("id");

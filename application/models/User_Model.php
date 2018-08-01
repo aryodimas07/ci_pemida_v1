@@ -81,7 +81,7 @@ class User_Model extends CI_Model
       $query = $this->db->get();
       return $query->row();
     }
-    
+
     public function isEmailDuplicate($email)
     {
       $this->db->get_where('user', array('email' => $email), 1);

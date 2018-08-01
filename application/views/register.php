@@ -14,61 +14,72 @@
 
   <title>Register</title>
 </head>
-<style>
-
+<style media="screen">
+@media (max-width: 575.98px) {
+  div.container {
+    width: 100%!important;
+  }
+}
+@media (min-width: 575.98px) {
+  #picWrapper .row {
+    height: 55px;
+  }
+}
 body{
-  background:#e3e3e3;
+  background-color: #e3e3e3  ;
 }
 .custom-bottom-margin{
-  padding-bottom:30px;
 }
 .form-register{
-  margin: 0 auto;
-  width:50%;
 }
 
 label {
-  align-items: center;
-  display: flex;
-  height: 40px;
-  color:black;
 }
 .form-group{
-  color:black;
 }
 
 
 .error-msg{
-  margin:5px auto;
-  width:30%;
-  background:#db3737;
-  color:#ffffff;
+  color:red;
 }
+
 .error{
   color:red;
 }
 
-.container{
+div.container{
+  width: 500px;
+  margin:50px auto;
+  background-color: white;
+  border: 1px solid;
+  border-color: lightgrey ;
+}
+ul.list-group{
+  background-color: white;
+
+  border-color: #0044cc #0044cc #002a80;
+}
+h1{
+  margin :10px auto;
+  text-align: center;
+  color:#006dcc;
 
 }
+.btn.btn-primary{
+  color:black;
+  background-color:white;
+  border-radius: 5px;
+  border-width : medium;
+}
+
 
 
 </style>
 <body>
-  <?php
-  if(isset($errorMsg))
-  {
-    echo '<div class="error-msg">';
-    echo $errorMsg;
-    echo '</div>';
-    unset($errorMsg);
-  }
-  ?>
-  <div class="container shadow" style="width: 500px">
 
-
+  <div class="container shadow">
   <ul class="list-group">
-    <li class="list-group-item">
+    <h1>Registrasi</h1>
   <?php
   $attributes = array('id' => 'identicalForm', 'class' => 'class=form-horizontal form-register');
   echo form_open('register',$attributes);
@@ -82,6 +93,15 @@ label {
     <label for="formemail" class="col-form-label">E-mail</label>
     <input type = "text" id='formemail' name = "email" class="form-control" value = "<?php echo set_value('email'); ?>" size = "127" placholder:"Nama lengkap" />
     <?php echo form_error('email', '<div class="error">', '</div>'); ?>
+    <?php
+    if(isset($errorMsg))
+    {
+      echo '<div class="error-msg">';
+      echo $errorMsg;
+      echo '</div>';
+      unset($errorMsg);
+    }
+    ?>
   </div>
   <div class="form-group">
     <label for="formtelp" class="col-form-label">Nomor telefon</label>
@@ -114,7 +134,6 @@ label {
      Sudah terdaftar? <?php echo anchor(site_url(), 'login');?> disini.
   </div>
 </form>
-</li>
 </ul>
 </div>
 

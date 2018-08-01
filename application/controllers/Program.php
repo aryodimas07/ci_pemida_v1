@@ -271,7 +271,7 @@ class Program extends CI_Controller
         'Nama program',
         'trim|required',
     array(
-      'required' => 'kolom %s tidak boleh kosong.'
+      'required' => 'Kolom %s tidak boleh kosong.'
     )
   );
         $this->form_validation->set_rules(
@@ -279,7 +279,7 @@ class Program extends CI_Controller
       'Deskripsi program',
       'trim|required',
   array(
-    'required' => 'kolom %s tidak boleh kosong.'
+    'required' => 'Kolom %s tidak boleh kosong.'
   )
 );
         $this->form_validation->set_rules(
@@ -287,23 +287,23 @@ class Program extends CI_Controller
     'Nama PIC',
     'trim|required|callback_username_check',
 array(
-  'required' => 'kolom %s tidak boleh kosong.'
+  'required' => 'Kolom %s tidak boleh kosong.'
 )
 );
         $this->form_validation->set_rules(
     'timeplan',
-    'timeplan program',
+    'Timeplan program',
     'trim|required',
 array(
-  'required' => 'kolom %s tidak boleh kosong.'
+  'required' => 'Kolom %s tidak boleh kosong.'
 )
 );
         $this->form_validation->set_rules(
     'nilai_release',
-    'nilai release',
+    'Nilai Release',
     'trim|required',
 array(
-  'required' => 'kolom %s tidak boleh kosong.'
+  'required' => 'Kolom %s tidak boleh kosong.'
 )
 );
         $this->form_validation->set_rules(
@@ -361,7 +361,7 @@ array(
         if ($this->User_Model->user_exist($str)) {
             return true;
         } else {
-            $this->form_validation->set_message('username_check', 'semua kolom {field} harus sesuai dengan nama user dan tidak boleh kosong');
+            $this->form_validation->set_message('username_check', 'Semua kolom {field} harus sesuai dengan nama user dan tidak boleh kosong');
             return false;
         }
     }

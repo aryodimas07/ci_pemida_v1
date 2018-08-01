@@ -25,23 +25,23 @@ class User extends CI_Controller {
 
             $this->form_validation->set_rules('nama', 'Nama', 'trim|required',
                                                   array(
-                                                    'required' => 'kolom %s tidak boleh kosong.'
+                                                    'required' => 'Kolom %s tidak boleh kosong.'
                                                 )
                                               );
             $this->form_validation->set_rules('email', 'e-mail', 'trim|required|valid_email',
                                                   array(
-                                                    'required' => 'kolom %s tidak boleh kosong.',
-                                                    'valid_email' => 'kolom %s harus berisi alamat e-mail yang valid'
+                                                    'required' => 'Kolom %s tidak boleh kosong.',
+                                                    'valid_email' => 'Kolom %s harus berisi alamat e-mail yang valid'
                                                 )
                                               );
             $this->form_validation->set_rules('telp', 'Nomor telefon', 'trim|required',
                                                   array(
-                                                    'required' => 'kolom %s tidak boleh kosong.'
+                                                    'required' => 'Kolom %s tidak boleh kosong.'
                                                 )
                                               );
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]',
                                                 array(
-                                                  'required' => 'kolom %s tidak boleh kosong.',
+                                                  'required' => 'Kolom %s tidak boleh kosong.',
                                                   'min_length[8]' => '%s minimal 8 karakter'
                                                 )
                                               );
@@ -60,12 +60,12 @@ class User extends CI_Controller {
                   $telpno = $this->input->post('telp');
                   $password = $this->input->post('password');
                   //$options = array("cost"=>4);
-			            //$password = password_hash($password,PASSWORD_BCRYPT);
+			            $hashpassword = password_hash($password,PASSWORD_BCRYPT);
 
                   $insertData = array('nama'=>$nama,
                   								'notelp'=>$telpno,
                   								'email'=>$email,
-                  								'password'=>$password
+                  								'password'=>$hashpassword
                                 );
                   $insertUser = $this->insert_model->insertUser($insertData);
 

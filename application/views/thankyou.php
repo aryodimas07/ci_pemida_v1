@@ -31,7 +31,7 @@ body{
 
 	<div class="row">
 		<div class="col-md-12 text-center">
-			Thank you for you regisration
+			Thank you for your regisration.
 			<p><?php echo anchor(site_url(), 'Kembali'); ?></p>
 		</div>
 
