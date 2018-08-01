@@ -16,6 +16,7 @@ class Program extends CI_Controller
             $login_email = $this->session->userdata()['logged_in']['email'];
             $data['program_list_done'] = $this->program_model->get_program_info_by_status_and_email(1, $login_email);
             $data['program_list_not_done'] = $this->program_model->get_program_info_by_status_and_email(0, $login_email);
+            $this->load->view('templates/header/login-search-header');
             $this->load->view('app/programsearch', $data);
         } else {
             $this->load->view('auth/loginPage');
@@ -58,54 +59,57 @@ class Program extends CI_Controller
 
                 //ambil proc dari database
                 $proc_data = $this->program_model->get_procurement_relate($slug);
-                //ekstrak id proc
-                for ($i=0; $i < count($proc_data); $i++) {
-                  $proc_id[$i] = $proc_data[$i]['id_procurement'];
-                }
+                if (count($proc_data) == 0) {
+                  //ekstrak id proc
+                  for ($i=0; $i < count($proc_data); $i++) {
+                    $proc_id[$i] = $proc_data[$i]['id_procurement'];
+                  }
 
-                // echo json_encode($proc_data);
-                // echo "<br />";
-
-                if (!in_array(4, $proc_id) && in_array(5, $proc_id)) {
-                  // echo 'ada 5, tdk ada 4';
-                  $proc_data[4] = $proc_data[3];
-                  $proc_data[3] = null;
-                } else {
-                  // echo "string";
-                }
-
-
-                // echo "<br />";
-                // echo json_encode($proc_data);
-
-
-                // echo json_encode($data['proc_status']);
-                // echo "<br />";
-                // echo "<br />";
-                // echo json_encode($proc_data);
-                //
-                // echo "<br />";
-                // echo "<br />";
-
-
-                // echo json_encode($proc_id);
-                // echo "<br />";
-                for ($j=1; $j <= 9; $j++) {
-                  if (!in_array($j, $proc_id)) {
-                    $proc_update = $j;
-                    // echo $j;
-                    break;
+                  echo json_encode($proc_data);
+                  if (in_array(3, $proc_id) && !in_array(4, $proc_id) && in_array(5, $proc_id)) {
+                    // echo 'ada 5, tdk ada 4';
+                    $proc_data[4] = $proc_data[3];
+                    $proc_data[3] = null;
                   } else {
-                    if (!in_array(4, $proc_id) && !in_array(5, $proc_id)) {
-                      // echo "4, 5";
-                      $proc_update[0] = 4;
-                      $proc_update[1] = 5;
+                  }
+
+
+                  // echo "<br />";
+                  // echo json_encode($proc_data);
+
+
+                  // echo json_encode($data['proc_status']);
+                  // echo "<br />";
+                  // echo "<br />";
+                  // echo json_encode($proc_data);
+                  //
+                  // echo "<br />";
+                  // echo "<br />";
+
+
+                  // echo json_encode($proc_id);
+                  // echo "<br />";
+                  for ($j=1; $j <= 9; $j++) {
+                    if (!in_array($j, $proc_id)) {
+                      $proc_update = $j;
+                      // echo $j;
                       break;
+                    } else {
+                      if (!in_array(4, $proc_id) && !in_array(5, $proc_id)) {
+                        // echo "4, 5";
+                        $proc_update[0] = 4;
+                        $proc_update[1] = 5;
+                        break;
+                      }
                     }
                   }
+                  // echo json_encode($proc_update);
+                  if (isset($proc_update)) {
+                    $data['proc_update'] = $proc_update;
+                  }
+
                 }
-                // echo json_encode($proc_update);
-                $data['proc_update'] = $proc_update;
+
 
 
                 // //cek proses procurement sampai berapa
@@ -152,6 +156,7 @@ class Program extends CI_Controller
                 } else {
                     $data['status'] = 'Selesai';
                 }
+                $this->load->view('templates/header/login-header');
                 $this->load->view('app/viewProgram', $data);
             } else {
                 show_error("Tidak terdapat program bernama:<br/>".$slug);
@@ -213,6 +218,9 @@ class Program extends CI_Controller
 
         //cek role yg dimiliki user dlm program
         $pic_role = $this->program_model->get_pic_role($user, $program_slug);
+        echo json_encode($pic_role);
+        echo json_encode($proc_update);
+
 
         //jika tidak ada role maka user tidak memiliki kewenangan
         if ($pic_role == null) {
@@ -221,12 +229,12 @@ class Program extends CI_Controller
           if (is_array($proc_update)) {
             if ($role[$pic_role['role_id']][$proc_update[0]] == 1) {
               //update informasi proses procurement
-              $this->program_model->create_information($proc_update, $program_slug);
+              $this->program_model->create_information($proc_update[0], $program_slug);
               redirect(site_url('program/view/'.$program_slug));
             } else {
               if ($role[$pic_role['role_id']][$proc_update[1]] == 1) {
                 //update informasi proses procurement
-                $this->program_model->create_information($proc_update, $program_slug);
+                $this->program_model->create_information($proc_update[1], $program_slug);
                 redirect(site_url('program/view/'.$program_slug));
               }else {
                 redirect(site_url('program/view/'.$program_slug.'/2'));
@@ -239,7 +247,8 @@ class Program extends CI_Controller
               $this->program_model->create_information($proc_update, $program_slug);
               redirect(site_url('program/view/'.$program_slug));
             } else {
-              redirect(site_url('program/view/'.$program_slug.'/2'));
+              echo "string";
+              // redirect(site_url('program/view/'.$program_slug.'/2'));
             }
           }
 

@@ -120,25 +120,6 @@
         </div>
       </div>
     <?php endif; ?>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow-lg">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo site_url(); ?>">
-          <img src=<?php echo site_url('assets/img/Asset1ldpi.png'); ?> width="30" height="30" class="d-inline-block align-top" alt="">
-          PEMIDA
-        </a>
-        <div class="d-flex flex-row bd-highlight">
-          <div class="dropdown pointer">
-            <img id="navbar-avatar" class="rounded-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src=<?php echo site_url('assets/img/avatar.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-              <h6 class="dropdown-header"><?php echo get_email_info() ?></h6>
-              <a class="dropdown-item" href="<?php echo site_url('logout'); ?>">Logout</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
     <div class="container mt-3 mb-1">
       <div class="h6">RINCIAN PROGRAM</div>
       <div class="row">
@@ -161,9 +142,11 @@
           <p><?php echo $program_info['deskripsi']; ?></p>
         </div>
         <div class="col-xl d-flex align-items-end">
-          <button id="update-xl" type="button" class="mb-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter">
-            Update Procurement
-          </button>
+          <?php if (strtolower($status) != 'selesai'): ?>
+            <button id="update-xl" type="button" class="mb-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter">
+              Update Procurement
+            </button>
+          <?php endif; ?>
         </div>
       </div>
       <div class="row">
@@ -244,9 +227,11 @@
         </div>
         <div class="col-xl">
           <!-- procurement -->
-          <button id="update-sm" type="button" class="mb-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter" style="width: 100%">
-            Update Procurement
-          </button>
+          <?php if (strtolower($status) != 'selesai'): ?>
+            <button id="update-sm" type="button" class="mb-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter" style="width: 100%">
+              Update Procurement
+            </button>
+          <?php endif; ?>
           <ul id="proses-procurement" class="list-group shadow mb-4">
             <form style="display:none" id="update" action=<?php echo site_url('program/update') ?> method="post">
               <?php
