@@ -42,13 +42,21 @@ class User_Model extends CI_Model
 
     public function is_user_exist($data)
     {
-        $condition = "email =" . "'" . $data['email'] . "' AND " . "password =" . "'" . $data['password'] . "'";
+        $condition = "email =" . "'" . $data['email']."'";
         $query = $this->db->get_where('user', $condition);
+        $query = $query->result_array();
 
-        if ($query->num_rows() == 1) {
-            return true;
+
+        if (count($query)== 1) {
+            if (password_verify($data['password'], $query[0]['password'])) {
+              // echo json_encode($query);
+              return true;
+            } else {
+              return false;
+            }
         } else {
-            return false;
+          // echo "string";
+          return false;
         }
     }
     function user_exist($key)
