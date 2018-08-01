@@ -9,6 +9,19 @@
   <!--bootstrap.css-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <style media="screen">
+  #update-sm {
+    display: none;
+  }
+
+  @media (max-width: 1200px) {
+    #update-sm {
+      display: block;
+    }
+    #update-xl {
+      display: none;
+    }
+  }
+
   @media (max-width: 575.98px) {
     .text-mobile-center {
       text-align: center!important;
@@ -19,6 +32,8 @@
       height: 55px;
     }
   }
+
+
   .list-group-header {
     z-index: 100;
     font-weight: bold;
@@ -145,7 +160,10 @@
           <!-- deskripsi -->
           <p><?php echo $program_info['deskripsi']; ?></p>
         </div>
-        <div class="col-xl">
+        <div class="col-xl d-flex align-items-end">
+          <button id="update-xl" type="button" class="mb-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter">
+            Update Procurement
+          </button>
         </div>
       </div>
       <div class="row">
@@ -226,12 +244,16 @@
         </div>
         <div class="col-xl">
           <!-- procurement -->
+          <button id="update-sm" type="button" class="mb-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter" style="width: 100%">
+            Update Procurement
+          </button>
           <ul id="proses-procurement" class="list-group shadow mb-4">
             <form style="display:none" id="update" action=<?php echo site_url('program/update') ?> method="post">
               <?php
               $data = array(
                 'program_slug' => $program_info['slug'],
-                'user_logged_in' => $user_logged_in
+                'user_logged_in' => $user_logged_in,
+                'proc_update' => $proc_update
               );
               echo form_hidden($data);
               ?>
@@ -243,26 +265,16 @@
               <li class="list-group-item">
                 <div class="a">
                   <?php echo $proc_list[$i]['proses']; ?>
+                  <?php if (isset($proc_data[$i]) && $proc_data[$i] != null): ?>
+                    <span class="badge badge-primary ml-3"><?php echo $proc_data[$i]['submitDate'] ?></span>
+                  <?php endif; ?>
                 </div>
               </li>
             <?php } ?>
-            <li class="list-group-item">
-              <div class="a">
-                Test
-                <span class="badge badge-primary ml-3"><?php echo date('y-m-d') ?></span>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="a disable">
-                Test
-                <button type="button" class="ml-3 btn btn-danger shadow" data-toggle="modal" data-target="#exampleModalCenter">
-                  Update
-                </button>
-              </div>
-            </li>
           </ul>
         </div>
 
+        <!-- modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -273,10 +285,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                Anda yakin ingin mengupdate <br>
-                <strong>
-                  <?php echo $proc; ?> ?
-                </strong>
+                Anda yakin ingin mengupdate?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

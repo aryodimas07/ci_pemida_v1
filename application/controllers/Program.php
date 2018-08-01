@@ -58,36 +58,55 @@ class Program extends CI_Controller
 
                 //ambil proc dari database
                 $proc_data = $this->program_model->get_procurement_relate($slug);
-
-                echo json_encode($data['proc_status']);
-                echo "<br />";
-                echo "<br />";
-                echo json_encode($proc_data);
-
-                echo "<br />";
-                echo "<br />";
-
                 //ekstrak id proc
                 for ($i=0; $i < count($proc_data); $i++) {
                   $proc_id[$i] = $proc_data[$i]['id_procurement'];
                 }
-                echo json_encode($proc_id);
-                echo "<br />";
+
+                // echo json_encode($proc_data);
+                // echo "<br />";
+
+                if (!in_array(4, $proc_id) && in_array(5, $proc_id)) {
+                  // echo 'ada 5, tdk ada 4';
+                  $proc_data[4] = $proc_data[3];
+                  $proc_data[3] = null;
+                } else {
+                  // echo "string";
+                }
+
+
+                // echo "<br />";
+                // echo json_encode($proc_data);
+
+
+                // echo json_encode($data['proc_status']);
+                // echo "<br />";
+                // echo "<br />";
+                // echo json_encode($proc_data);
+                //
+                // echo "<br />";
+                // echo "<br />";
+
+
+                // echo json_encode($proc_id);
+                // echo "<br />";
                 for ($j=1; $j <= 9; $j++) {
                   if (!in_array($j, $proc_id)) {
-                    echo $j;
+                    $proc_update = $j;
+                    // echo $j;
                     break;
                   } else {
                     if (!in_array(4, $proc_id) && !in_array(5, $proc_id)) {
-                      echo "4, 5";
+                      // echo "4, 5";
+                      $proc_update[0] = 4;
+                      $proc_update[1] = 5;
                       break;
                     }
                   }
                 }
+                // echo json_encode($proc_update);
+                $data['proc_update'] = $proc_update;
 
-                echo "<br />";
-                //id proc yg harus di update
-                echo json_encode($data['proc_status']);
 
                 // //cek proses procurement sampai berapa
                 // $proc_length = count($proc_data);
@@ -189,38 +208,41 @@ class Program extends CI_Controller
         $program_slug = $this->input->post('program_slug');
 
         //cek tahap yg harus di update
-        $proc_data = $this->program_model->get_procurement_relate($program_slug);
-        $proc_length = count($proc_data);
-        $proc_update = 100;
-        echo json_encode($proc_data);
-        echo "proc update : ".$proc_update;
-        for ($i=0; $i < count($proc_data); $i++) {
-            $proc_updated[$i] = $proc_data[$i]['id_procurement'];
-        }
-        echo json_encode($proc_updated);
-        for ($i=1; $i <= 9; $i++) {
-            if (!in_array($i, $proc_updated)) {
-                $proc_update = $i;
-                break;
-            }
-        }
-        echo $proc_update;
+        $proc_update = $this->input->post('proc_update');
+
 
         //cek role yg dimiliki user dlm program
         $pic_role = $this->program_model->get_pic_role($user, $program_slug);
 
         //jika tidak ada role maka user tidak memiliki kewenangan
         if ($pic_role == null) {
-            echo "Anda tidak memiliki kewenangan dalam program ini";
+          redirect(site_url('program/view/'.$program_slug.'/2'));
         } else {
-            //cek apakah role tsb dapat mengupdate tahap tersebut
-            if ($role[$pic_role['role_id']][$proc_update] == 1) {
+          if (is_array($proc_update)) {
+            if ($role[$pic_role['role_id']][$proc_update[0]] == 1) {
+              //update informasi proses procurement
+              $this->program_model->create_information($proc_update, $program_slug);
+              redirect(site_url('program/view/'.$program_slug));
+            } else {
+              if ($role[$pic_role['role_id']][$proc_update[1]] == 1) {
                 //update informasi proses procurement
                 $this->program_model->create_information($proc_update, $program_slug);
                 redirect(site_url('program/view/'.$program_slug));
-            } else {
+              }else {
                 redirect(site_url('program/view/'.$program_slug.'/2'));
+              }
             }
+          } else {
+            //cek apakah role tsb dapat mengupdate tahap tersebut
+            if ($role[$pic_role['role_id']][$proc_update] == 1) {
+              //update informasi proses procurement
+              $this->program_model->create_information($proc_update, $program_slug);
+              redirect(site_url('program/view/'.$program_slug));
+            } else {
+              redirect(site_url('program/view/'.$program_slug.'/2'));
+            }
+          }
+
         }
     }
 
