@@ -15,10 +15,9 @@ class Auth extends CI_Controller
         if (is_logged_in()) {
           redirect(site_url('program'));
         } else {
-          // var_dump("$2y$10$7Vqrk8xTqTRFtpzOir1s1esNRlNCBTYgghiv2bSPhut0YCQpNp/AS");
-          // echo password_hash('afif', PASSWORD_BCRYPT);
-          // $hash = password_hash('afif', PASSWORD_BCRYPT);
+          // echo password_hash('reza', PASSWORD_BCRYPT);
           // echo "<br />";
+          // echo password_hash('jono', PASSWORD_BCRYPT);
           // if (password_verify('afif', $hash)) {
           //   echo "TRUE";
           // } else {

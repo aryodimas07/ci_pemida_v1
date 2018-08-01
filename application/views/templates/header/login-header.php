@@ -1,51 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Bootstrap core CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-<!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
-    <title>PEMIDA</title>
-    <style media="screen">
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg unique-color-dark">
-      <a href=<?php echo site_url(); ?> class="navbar-brand">PEMIDA</a>
-      <ul class="navbar-nav ml-auto nav-flex-icons">
-        <li class="nav-item avatar dropdown">
-          <a href="#" class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown">
-            <img src=<?php echo site_url('assets/img/Black-Logoldpi.png') ?> width=35 height="35" id="avatar" class="rounded-circle z-depth-0" alt="">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Action</a>
-          </div>
-        </li>
-      </ul>
-      <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu4">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <style media="screen">
+  .pointer {
+    cursor: pointer;
+  }
+
+  #avatar {
+    position: absolute;
+    top: 15px;
+    right: 75px;
+  }
+  </style>
+  <title>PEMIDA</title>
+  <style media="screen">
+  </style>
+</head>
+<body>
+  <nav id="nav-lg" class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <div class="container-fluid d-flex bd-highlight">
+      <a class="navbar-brand mr-auto p-2 bd-highlight" href=<?php echo site_url() ?>>
+        <img src=<?php echo site_url('assets/img/Asset1ldpi.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
+        PEMIDA
+      </a>
+      <button class="navbar-toggler p-2" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href=<?php echo site_url('create'); ?>>Buat Program <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+      <div id="avatar" class="dropdown pointer">
+        <img id="navbar-avatar" class="rounded-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src=<?php echo site_url('assets/img/avatar.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <h6 class="dropdown-header"><?php echo get_email_info() ?></h6>
+          <a class="dropdown-item" href="<?php echo site_url('logout'); ?>">Logout</a>
+        </div>
+      </div>
     </div>
-</div>
-    </nav>
+  </nav>

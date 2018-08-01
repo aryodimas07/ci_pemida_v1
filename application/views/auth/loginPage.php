@@ -99,6 +99,10 @@
       <input type="password" name="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required>
       <button id="btn-signin" class="btn btn-lg btn-block" type="submit">Sign in</button>
     </form>
+    <p>
+      Untuk mendaftar klik 
+      <a href=<?php echo site_url('register'); ?>>link ini</a>
+    </p>
   </div>
 
   <!--jQuery, Popper.js, bootstrap.js-->
