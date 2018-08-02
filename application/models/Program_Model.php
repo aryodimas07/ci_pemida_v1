@@ -129,6 +129,33 @@ class Program_Model extends CI_Model
         return $query->row_array();
     }
 
+    public function update_nilaipr($slug, $nilai)
+    {
+        $data = array(
+        'nilaiPR' => $nilai,
+        );
+        $this->db->where('slug', $slug);
+        $this->db->update('program', $data);
+    }
+
+    public function update_nilaipo($slug, $nilai)
+    {
+        $data = array(
+        'nilaiPO' => $nilai,
+        );
+        $this->db->where('slug', $slug);
+        $this->db->update('program', $data);
+    }
+
+    public function update_nilaigr($slug, $nilai)
+    {
+        $data = array(
+        'nilaiGR' => $nilai,
+        );
+        $this->db->where('slug', $slug);
+        $this->db->update('program', $data);
+    }
+
     public function update_slug($slug,$index)
     {
       $data = array(
@@ -149,7 +176,7 @@ class Program_Model extends CI_Model
       $this->db->insert('informasi', $data);
 
       //jika tahap proc sudah sampai "kontrak"
-      if ($proc == 9) {
+      if ($proc == 10) {
         $this->db->where('slug', $slug);
         $this->db->update('program', array('status' => 1));
       }

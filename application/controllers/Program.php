@@ -72,7 +72,7 @@ class Program extends CI_Controller
                       $proc_data[3] = null;
                     }
                     //cek tahap apa yg perlu diupdate
-                    for ($j=1; $j <= 9; $j++) {
+                    for ($j=1; $j <= 10; $j++) {
                       if (!in_array($j, $proc_id)) {
                         $proc_update = $j;
                         // echo $j;
@@ -127,6 +127,7 @@ class Program extends CI_Controller
         $role[1][7] = 0;
         $role[1][8] = 0;
         $role[1][9] = 0;
+        $role[1][10] = 0;
         //update role for PMO
         $role[2][1] = 0;
         $role[2][2] = 0;
@@ -137,26 +138,29 @@ class Program extends CI_Controller
         $role[2][7] = 0;
         $role[2][8] = 0;
         $role[2][9] = 0;
+        $role[2][10] = 0;
         //update role for GAF
         $role[3][1] = 0;
         $role[3][2] = 0;
-        $role[3][3] = 0;
+        $role[3][3] = 1;
         $role[3][4] = 0;
         $role[3][5] = 1;
         $role[3][6] = 1;
         $role[3][7] = 1;
         $role[3][8] = 1;
         $role[3][9] = 1;
+        $role[3][10] = 1;
         //update role for DEV
         $role[4][1] = 1;
         $role[4][2] = 1;
-        $role[4][3] = 1;
+        $role[4][3] = 0;
         $role[4][4] = 1;
         $role[4][5] = 0;
         $role[4][6] = 0;
         $role[4][7] = 0;
         $role[4][8] = 0;
         $role[4][9] = 0;
+        $role[4][10] = 0;
 
         $user = $this->input->post('user_logged_in');
         $program_slug = $this->input->post('program_slug');
@@ -179,7 +183,7 @@ class Program extends CI_Controller
             if ($role[$pic_role['role_id']][$proc_update[0]] == 1) {
               //update informasi proses procurement
               $this->program_model->create_information($proc_update[0], $program_slug);
-              redirect(site_url('program/view/'.$program_slug));
+              redirect(site_url('program/view/'.$program_slug.'/1'));
             } else {
               if ($role[$pic_role['role_id']][$proc_update[1]] == 1) {
                 //update informasi proses procurement
@@ -194,7 +198,24 @@ class Program extends CI_Controller
             if ($role[$pic_role['role_id']][$proc_update] == 1) {
               //update informasi proses procurement
               $this->program_model->create_information($proc_update, $program_slug);
-              redirect(site_url('program/view/'.$program_slug));
+              if ($proc_update == 3) {
+                $nilai = $this->input->post('nilai_pr');
+                echo "<br />";
+                echo $nilai;
+                $this->program_model->update_nilaipr($program_slug, $nilai);
+              } else {
+                if ($proc_update == 9) {
+                  $nilai = $this->input->post('nilai_po');
+                  $this->program_model->update_nilaipo($program_slug, $nilai);
+                } else {
+                  if ($proc_update == 10) {
+                    $nilai = $this->input->post('nilai_gr');
+                    $this->program_model->update_nilaigr($program_slug, $nilai);
+                  }
+                }
+              }
+
+              redirect(site_url('program/view/'.$program_slug.'/1'));
             } else {
               echo "string";
               redirect(site_url('program/view/'.$program_slug.'/2'));
@@ -202,6 +223,15 @@ class Program extends CI_Controller
           }
 
         }
+    }
+
+    public function update_nilaipr()
+    {
+      $slug = $this->input->post('slug');
+      $nilai = $this->input->post('nilai_pr');
+      echo $slug;
+      echo $nilai;
+      $this->program_model->update_nilaipr($slug, $nilai);
     }
 
     public function name_to_slug($name)

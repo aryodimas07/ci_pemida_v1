@@ -232,21 +232,16 @@
               Update Procurement
             </button>
           <?php endif; ?>
+            <!-- <form class="" action=<?php echo site_url('program/update_nilaipr'); ?> method="post">
+              <input type="hidden" name="slug" value=<?php echo $program_info['slug'] ?>>
+              <input type="hidden" name="nilai_pr" value="5000000000">
+              <input type="submit" name="" value="update nilai PR">
+            </form> -->
           <ul id="proses-procurement" class="list-group shadow mb-4">
-            <form style="display:none" id="update" action=<?php echo site_url('program/update') ?> method="post">
-              <?php
-              $data = array(
-                'program_slug' => $program_info['slug'],
-                'user_logged_in' => $user_logged_in,
-                'proc_update' => $proc_update
-              );
-              echo form_hidden($data);
-              ?>
-            </form>
             <li class="list-group-item">
               <h6 class="mb-0">PROSES PROCUREMENT</h6>
             </li>
-            <?php for ($i=0; $i < 9; $i++) { ?>
+            <?php for ($i=0; $i < 10; $i++) { ?>
               <li class="list-group-item">
                 <div class="a">
                   <?php echo $proc_list[$i]['proses']; ?>
@@ -270,6 +265,72 @@
                 </button>
               </div>
               <div class="modal-body">
+                <?php if ($proc_update != 3 && $proc_update != 9 && $proc_update != 10): ?>
+                  <form id="update" name="" action=<?php echo site_url('program/update') ?> method="post">
+                    <div class="form-group">
+                      <?php
+                      $data = array(
+                        'program_slug' => $program_info['slug'],
+                        'user_logged_in' => $user_logged_in,
+                        'proc_update' => $proc_update
+                      );
+                      echo form_hidden($data);
+                      ?>
+                    </div>
+                  </form>
+                <?php else: ?>
+                  <?php if ($proc_update == 3): ?>
+                    <form id="update" name="nilai_pr" action=<?php echo site_url('program/update') ?> method="post">
+                      <div class="form-group">
+                        <?php
+                        $data = array(
+                          'program_slug' => $program_info['slug'],
+                          'user_logged_in' => $user_logged_in,
+                          'proc_update' => $proc_update
+                        );
+                        echo form_hidden($data);
+                        ?>
+                        <label for="nilai">Nilai PR</label>
+                        <input type="number" class="form-control" name="nilai_pr" placeholder="Masukkan nilai PR" required>
+                      </div>
+                    </form>
+                  <?php else: ?>
+                    <?php if ($proc_update == 9): ?>
+                      <form id="update" name="nilai_po" action=<?php echo site_url('program/update') ?> method="post">
+                        <div class="form-group">
+                          <?php
+                          $data = array(
+                            'program_slug' => $program_info['slug'],
+                            'user_logged_in' => $user_logged_in,
+                            'proc_update' => $proc_update
+                          );
+                          echo form_hidden($data);
+                          ?>
+                          <label for="nilai">Nilai PO</label>
+                          <input type="number" class="form-control" name="nilai_po" placeholder="Masukkan nilai PO" required>
+                        </div>
+                      </form>
+                    <?php else: ?>
+                      <?php if ($proc_update == 10): ?>
+                        <form id="update" name="nilai_gr" action=<?php echo site_url('program/update') ?> method="post">
+                          <div class="form-group">
+                            <?php
+                            $data = array(
+                              'program_slug' => $program_info['slug'],
+                              'user_logged_in' => $user_logged_in,
+                              'proc_update' => $proc_update
+                            );
+                            echo form_hidden($data);
+                            ?>
+                            <label for="nilai">Nilai PO</label>
+                            <input type="number" class="form-control" name="nilai_gr" placeholder="Masukkan nilai GR" required>
+                          </div>
+                        </form>
+                      <?php endif; ?>
+                    <?php endif; ?>
+                  <?php endif; ?>
+
+                <?php endif; ?>
                 Anda yakin ingin mengupdate?
               </div>
               <div class="modal-footer">
