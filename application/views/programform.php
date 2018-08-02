@@ -95,7 +95,6 @@ h1{
   color:#006dcc;
 }
 </style>
-   <h1>Buat program</h1>
 <div class="container shadow">
    <ul class="list-group">
 
@@ -105,6 +104,7 @@ h1{
         <?php $attributes = array('id' => 'createform', 'class' => 'class=form-horizontal form-create');
           echo form_open('create',$attributes); ?>
 
+          <h1>Buat program</h1>
           <div class="row">
             <div class="col">
          <label for="formnama" class="col-form-label">Nama program</label>

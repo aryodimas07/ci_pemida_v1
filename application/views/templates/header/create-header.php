@@ -7,6 +7,8 @@
   .pointer {
     cursor: pointer;
   }
+
+
   </style>
   <title>PEMIDA</title>
   <style media="screen">
@@ -19,8 +21,6 @@
         <img src=<?php echo site_url('assets/img/Asset1ldpi.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
         PEMIDA
       </a>
-      <button class="navbar-toggler p-2" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
@@ -29,12 +29,18 @@
           </li>
         </ul>
       </div>
-      <div id="avatar" class="dropdown pointer">
+        <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+      <div id="avatar" class="dropdown pointer collapse navbar-collapse">
         <img id="navbar-avatar" class="rounded-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src=<?php echo site_url('assets/img/avatar.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
           <h6 class="dropdown-header"><?php echo get_email_info() ?></h6>
           <a class="dropdown-item" href="<?php echo site_url('logout'); ?>">Logout</a>
         </div>
       </div>
+    </li>
+  </ul>
+      <button class="navbar-toggler p-2" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </div>
   </nav>
