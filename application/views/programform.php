@@ -55,6 +55,7 @@ li {
   color: black;
   text-decoration: none;
   display: block;
+  text-align: center;
 }
 .error{
   color:red;
@@ -64,8 +65,7 @@ ul.list-group{
 }
 div.container{
 
-  width: 500px;
-  margin:50px auto;
+  margin:25px auto;
   background-color: white;
   border: 1px solid;
   border-color: lightgrey ;
@@ -97,20 +97,33 @@ h1{
 </style>
 <div class="container shadow">
    <ul class="list-group">
-     <h1>Buat program</h1>
+
    <body onload="readonly();">
       <!-- <form action = "" method = ""> -->
          <?php //echo validation_errors(); ?>
         <?php $attributes = array('id' => 'createform', 'class' => 'class=form-horizontal form-create');
           echo form_open('create',$attributes); ?>
 
-
+          <h1>Buat program</h1>
+          <div class="row">
+            <div class="col">
          <label for="formnama" class="col-form-label">Nama program</label>
          <div class="form-group">
           <input type = "text" id='formnama' name = "nama" class="form-control" value = "<?php echo set_value('nama'); ?>" size = "127" placholder:"Masukan nama program" />
           <?php echo form_error('nama', '<div class="error">', '</div>'); ?>
-         </div>
+          <label for="datepicker" class="col-form-label">Tanggal program</label>
+          <div class="form-group">
+            <input type="text" name="date" id="datepicker" class="form-control" value= <?php echo date('Y-m-d H:i:s'); ?>/>
+          </div>
+          <label for="formnr" class="col-form-label">Nilai release</label>
+          <div class="form-group">
+            <input type="number" name="nilai_release" id='formnr' class="form-control" value = "<?php echo set_value('nilai_release'); ?>" min="0 "max="100000000000" onKeyUp="limitText(this.form.nilai_release,this.form.countdown,12);" onKeyDown="limitText(this.form.nilai_release,this.form.countdown,12);" />
+            <?php echo form_error('nilai_release', '<div class="error">', '</div>'); ?>
+          </div>
+        </div>
+      </div>
 
+      <div class="col">
          <label for="formdeskripsi" class="col-form-label">Deskripsi program</label>
          <div class="form-group">
            <textarea type = "text" id='formdeskripsi' name = "deskripsi" class="form-control"  style="resize:vertical" placholder:"Masukan nama program" rows="3"><?php if(isset($_POST['deskripsi'])) { echo htmlentities ($_POST['deskripsi']); }?></textarea>
@@ -121,15 +134,12 @@ h1{
            <textarea name = "timeplan" id='formtimeplan' class="form-control" style="resize:vertical" placholder:"Masukan nama program" rows="3"><?php if(isset($_POST['timeplan'])) { echo htmlentities ($_POST['timeplan']); }?></textarea>
            <?php echo form_error('timeplan', '<div class="error">', '</div>'); ?>
          </div>
-        <label for="datepicker" class="col-form-label">Tanggal program</label>
-        <div class="form-group">
-          <input type="text" name="date" id="datepicker" class="form-control" value= <?php echo date('Y-m-d H:i:s'); ?>/>
-        </div>
-        <label for="formnr" class="col-form-label">Nilai release</label>
-        <div class="form-group">
-          <input type="number" name="nilai_release" id='formnr' class="form-control" value = "<?php echo set_value('nilai_release'); ?>" min="0 "max="100000000000" onKeyUp="limitText(this.form.nilai_release,this.form.countdown,12);" onKeyDown="limitText(this.form.nilai_release,this.form.countdown,12);" />
-          <?php echo form_error('nilai_release', '<div class="error">', '</div>'); ?>
-        </div>
+       </div>
+     </div>
+
+
+
+
 
         <label for="dynamic_field" class="col-form-label">Nama PIC</label>
         <div class="table-responsive form-group">
@@ -158,7 +168,7 @@ h1{
                                  <!--  <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" /> -->
                                    </div>
 
-
+                                 </div>
         <p><div><input type = "submit" class="btn btn-info" value = "Submit" /></div></p>
         <!-- <script>
             $(document).ready(function(){ alert("jquerytest"); });
@@ -166,7 +176,7 @@ h1{
       </form>
 </ul>
 </div>
-   </body>
+</body>
 </html>
 <script>
  $(document).ready(function(){
