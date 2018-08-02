@@ -52,101 +52,50 @@ class Program extends CI_Controller
                 //maka id proc semua 1
                 //dan ubah program status program selesai
 
-                //initial proc val
-                for ($i=0; $i < 9 ; $i++) {
-                    $data['proc_status'][$i] = 0;
-                }
-
                 //ambil proc dari database
                 $proc_data = $this->program_model->get_procurement_relate($slug);
-                if (count($proc_data) == 0) {
+                // echo count($proc_data);
+                if (count($proc_data) >= 0) {
                   //ekstrak id proc
                   for ($i=0; $i < count($proc_data); $i++) {
                     $proc_id[$i] = $proc_data[$i]['id_procurement'];
                   }
 
-                  echo json_encode($proc_data);
-                  if (in_array(3, $proc_id) && !in_array(4, $proc_id) && in_array(5, $proc_id)) {
-                    // echo 'ada 5, tdk ada 4';
-                    $proc_data[4] = $proc_data[3];
-                    $proc_data[3] = null;
-                  } else {
-                  }
-
-
                   // echo "<br />";
                   // echo json_encode($proc_data);
 
-
-                  // echo json_encode($data['proc_status']);
-                  // echo "<br />";
-                  // echo "<br />";
-                  // echo json_encode($proc_data);
-                  //
-                  // echo "<br />";
-                  // echo "<br />";
-
-
-                  // echo json_encode($proc_id);
-                  // echo "<br />";
-                  for ($j=1; $j <= 9; $j++) {
-                    if (!in_array($j, $proc_id)) {
-                      $proc_update = $j;
-                      // echo $j;
-                      break;
-                    } else {
-                      if (!in_array(4, $proc_id) && !in_array(5, $proc_id)) {
-                        // echo "4, 5";
-                        $proc_update[0] = 4;
-                        $proc_update[1] = 5;
+                  //masukkan data 4 jika perlu
+                  if (isset($proc_id)) {
+                    if (in_array(3, $proc_id) && !in_array(4, $proc_id) && in_array(5, $proc_id)) {
+                      // echo 'ada 5, tdk ada 4';
+                      $proc_data[4] = $proc_data[3];
+                      $proc_data[3] = null;
+                    }
+                    //cek tahap apa yg perlu diupdate
+                    for ($j=1; $j <= 9; $j++) {
+                      if (!in_array($j, $proc_id)) {
+                        $proc_update = $j;
+                        // echo $j;
                         break;
+                      } else {
+                        if (in_array(3, $proc_id) && !in_array(4, $proc_id) && !in_array(5, $proc_id)) {
+                          // echo "4, 5";
+                          $proc_update[0] = 4;
+                          $proc_update[1] = 5;
+                          break;
+                        }
                       }
                     }
+                    if (isset($proc_update)) {
+                      $data['proc_update'] = $proc_update;
+                    }
+                  } else {
+                    $data['proc_update'] = 1;
                   }
-                  // echo json_encode($proc_update);
-                  if (isset($proc_update)) {
-                    $data['proc_update'] = $proc_update;
-                  }
-
+                  // echo "<br />";
+                  // echo json_encode($data['proc_update']);
                 }
 
-
-
-                // //cek proses procurement sampai berapa
-                // $proc_length = count($proc_data);
-                // // jika sudah sampai tahap 9
-                // if ($proc_length == 9) {
-                //     //ubah status menjadi 1 (selesai)
-                //     $this->program_model->set_status($slug, 1);
-                //     //dan set semua proses menjadi 1 (selesai)
-                //     for ($i=0; $i < 9 ; $i++) {
-                //         $data['proc_status'][$i] = 1;
-                //     }
-                //
-                //     //jika sudah sampai tahap ke 4
-                // } elseif ($proc_length == 4) {
-                //     //ambil tahap terakhir
-                //     $last_proc = end($proc_data);
-                //     if ($last_proc == 4) {
-                //         //set selesai dari 1 - 4
-                //         for ($i=0; $i < 4 ; $i++) {
-                //             $data['proc_status'][$i] = 1;
-                //         }
-                //     } else {
-                //         //set selesai dari 1 - 3 dan 5
-                //         for ($i=0; $i < 3 ; $i++) {
-                //             $data['proc_status'][$i] = 1;
-                //         }
-                //         $data['proc_status'][5-1] = 1;
-                //     }
-                //     //jika tahap lain
-                // } else {
-                //     // code...
-                //     for ($i=0; $i < $proc_length ; $i++) {
-                //         $data['proc_status'][$i] = 1;
-                //     }
-                // }
-                //
                 $data['proc_list'] = $this->program_model->get_procurement();
                 $data['proc_data'] = $proc_data;
 
@@ -248,7 +197,7 @@ class Program extends CI_Controller
               redirect(site_url('program/view/'.$program_slug));
             } else {
               echo "string";
-              // redirect(site_url('program/view/'.$program_slug.'/2'));
+              redirect(site_url('program/view/'.$program_slug.'/2'));
             }
           }
 
