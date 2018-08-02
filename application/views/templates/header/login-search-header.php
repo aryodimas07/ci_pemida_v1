@@ -7,6 +7,7 @@
     .pointer {
       cursor: pointer;
     }
+
     </style>
     <title>PEMIDA</title>
     <style media="screen">
@@ -21,8 +22,9 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active mr-3" href=<?php echo site_url('create'); ?>>Create <span class="sr-only">(current)</span></a>
       </div>
+
     </div>
         <div class="input-group">
           <input id="inputSearchFilter1" onkeyup="searchFilter1()" type="text" class="form-control" placeholder="Cari nama program...">
@@ -45,7 +47,7 @@
           PEMIDA
         </a>
         <div class="d-flex flex-row bd-highlight ml-3">
-          <div class="dropdown pointer">
+          <div id="avatar" class="dropdown pointer">
             <img id="navbar-avatar" class="rounded-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src=<?php echo site_url('assets/img/avatar.png') ?> width="30" height="30" class="d-inline-block align-top" alt="">
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <h6 class="dropdown-header"><?php echo get_email_info() ?></h6>

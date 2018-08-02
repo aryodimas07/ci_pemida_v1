@@ -287,6 +287,7 @@ class Program extends CI_Controller
 
     public function create_program()
     {
+        $this->load->view('templates/header/login-header');
         /* Load form helper */
         $this->load->model('user_model');
         $this->load->model('insert_model');
